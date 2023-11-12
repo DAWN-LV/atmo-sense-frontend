@@ -1,7 +1,7 @@
 <p align="center">
   <a href="https://github.com/DAWN-LV/aqm-backend" target="blank"><img src="https://github.com/DAWN-LV/aqm-backend/blob/master/src/common/images/Logo.png?raw=true" width="350" alt="AQM Logo" /></a>
 </p>
-##Co2 level monitoring in university premises
+# Co2 level monitoring in university premises
 
 ## 1. Sensor Display
 Display of all sensors and graphical output of all data
