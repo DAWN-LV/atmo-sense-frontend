@@ -1,27 +1,74 @@
-# React + TypeScript + Vite
+# Universitātes telpu gaisa kvalitātes pārraudzības sistēma
+Co2 level monitoring in university premises
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 1. Sensor Display
+Display of all sensors and graphical output of all data
 
-Currently, two official plugins are available:
+## 2. Sensor Management
+Manage sensor functionality, adjust sensor to required parameters, delete sensors that aren`t needed or not working sensors.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 3. Communication with Back-end
+Receiving data from the back-end using Api, data processing. Sending data to the Back-end about adding/removing a sensor. Changing the sensor configuration.
 
-## Expanding the ESLint configuration
+## 4. Receiving Data from the Back-end
+Retrieving Api data.
+Data = {
+    "ip": 192.168.0.1,
+    "mac": "00:1A:2B:3C:4D:5E",
+    "name": "test_sensor",
+    "threshold": 800,
+    "status": "working" | "error",
+    "setup_timing": 1313131313213
+   "calculated_data": [
+    { "value": 111, "epoch": 111111111 },
+    { "value": 222, "epoch": 222222222 },
+    { "value": 333, "epoch": 333333333 },
+    { "value": 444, "epoch": 444444444 },
+    { "value": 555, "epoch": 555555555 }
+   ],
+   "data": [   
+    { "value": 666, "epoch": 666666666 },
+    { "value": 777, "epoch": 777777777 },
+    { "value": 888, "epoch": 888888888 },
+    { "value": 999, "epoch": 999999999 },
+    { "value": 123, "epoch": 123456789 },
+    { "value": 456, "epoch": 987654321 }
+   ]
+}
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+ip - Sensor ip address;
+mac - Sensor mac address;
+name - Sensor name;
+threshold - The set normal value of Co2 in the room;
+status - Sensor operating status;
+calculated_data - Expected sensor performance;
+data - Current data from the sensor;
+value - CO2 value from 0 to 2000;
+epoch - update frequency;
 
-- Configure the top-level `parserOptions` property like this:
+## 5. Adding a New Sensor
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
+The ability to add a new sensor. If you click on the add button, a modal window will open where you need to enter the sensor's ip address and name. After the request will be sent to Back-end about the status of the sensor.
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Instalation 
+
+git clone https://github.com/DAWN-LV/aqm-frontend
+
+## Install node modules
+
+npm install
+
+## Run project
+
+npm run dev
+
+## Project structure
+
+/src
+   /service
+   /assets
+   /pages
+      /auth
+         /components
+   /routes
+   /models
