@@ -17,7 +17,7 @@ Receiving data from the back-end using Api, data processing. Sending data to the
 
 Retrieving API data.
 
-```json
+```ts
 {
     "ip": "192.168.0.1",
     "mac": "00:1A:2B:3C:4D:5E",
@@ -41,31 +41,35 @@ Retrieving API data.
         {"value": 456, "epoch": 987654321}
     ]
 }
-
-ip: Sensor IP address;
-mac: Sensor MAC address;
-name: Sensor name;
-threshold: The set normal value of CO2 in the room;
-status: Sensor operating status;
-calculated_data: Expected sensor performance;
-data: Current data from the sensor;
-value: CO2 value from 0 to 2000;
-epoch: Update frequency;
-
+```
+* ip: Sensor IP address;
+* mac: Sensor MAC address;
+* name: Sensor name;
+* threshold: The set normal value of CO2 in the room;
+* status: Sensor operating status;
+* calculated_data: Expected sensor performance;
+* data: Current data from the sensor;
+* value: CO2 value from 0 to 2000;
+* epoch: Update frequency;
 
 ## 5. Adding a New Sensor
 
 The ability to add a new sensor. If you click on the add button, a modal window will open where you need to enter the sensor's ip address and name. After the request will be sent to Back-end about the status of the sensor.
 
 ## Instalation 
-
+```bash
 git clone https://github.com/DAWN-LV/aqm-frontend
+```
 
 ## Install node modules
 
+```bash
 npm install
+```
 
 ## Run project
 
+```bash
 npm run dev
+```
 
