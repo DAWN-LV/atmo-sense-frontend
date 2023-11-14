@@ -1,8 +1,8 @@
 
-type ErrorObject = { code: number, message?: string }
+type StatusType = { code: number, message?: string }
 
-export const getStatus = (err: ErrorObject = { code: 0, message: "" }, customMessage?: string): IStatus => ({
-    ok: err.code < 400,
-    code: err.code,
-    message: customMessage ? customMessage : (err.message ?? "")
+export const createStatus = (status: StatusType = { code: 0, message: "" }): IStatus => ({
+    ok: status.code < 400,
+    code: status.code,
+    message: status.message ?? ""
 })

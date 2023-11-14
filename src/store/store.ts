@@ -8,7 +8,7 @@ const appReducer = combineReducers({ sensorReducer });
 
 export const store = configureStore({
   reducer: appReducer,
-  middleware: (getDefaultMiddleware) => [...getDefaultMiddleware(), thunk],
+  middleware: (getDefaultMiddleware) => [ ...getDefaultMiddleware(), thunk ],
 });
 
 export type AppStateType = ReturnType<typeof appReducer>;
