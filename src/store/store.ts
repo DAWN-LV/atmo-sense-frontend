@@ -1,7 +1,8 @@
 import { AnyAction, combineReducers, configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import thunk, { ThunkDispatch } from "redux-thunk";
-import sensorReducer from "./reducers";
+
+import sensorReducer from "./sensors/reducer";
 
 const appReducer = combineReducers({ sensorReducer });
 
