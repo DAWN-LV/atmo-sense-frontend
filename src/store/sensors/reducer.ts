@@ -1,11 +1,11 @@
 import { Reducer } from "redux"
 import { ISensorStore, SensorsActionTypes, SensorActionTypes } from "./type"
-import Status from "models/Status"
+import { getStatus } from "../../utils/storeUtils"
 
 const initialState: ISensorStore = {
     sensors: [],
     isLoading: false,
-    status: new Status()
+    status: getStatus({ code: 0 })
 }
 
 const sensorReducer: Reducer<ISensorStore, SensorsActionTypes> = (
@@ -15,6 +15,10 @@ const sensorReducer: Reducer<ISensorStore, SensorsActionTypes> = (
     switch(action.type){
         case SensorActionTypes.SET_SENSORS: 
             return { ...state, sensors: action.payload }
+        case SensorActionTypes.SET_SENSORS_LOADING: 
+            return { ...state, isLoading: action.payload }
+        case SensorActionTypes.SET_SENSORS_STATUS: 
+            return { ...state, status: action.payload }
         default:
             return { ...state }
     }

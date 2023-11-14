@@ -1,4 +1,4 @@
-import { SetBoolean, SetStatus } from "store/type"
+import { SetBoolean, SetStatus } from "../type"
 
 export enum SensorActionTypes {
     SET_SENSORS = "SET_SENSORS",

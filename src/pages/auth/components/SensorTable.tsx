@@ -9,14 +9,14 @@ import {
 } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "../../../store/store";
 import { useEffect } from "react";
-import { getSensorsToStore } from "../../../store/reducers/Actions";
+import { fetchSensors } from "../../../store/sensors/action";
 
 const SensorTable: React.FC = () => {
   const { sensors } = useAppSelector((state) => state.sensorReducer);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(getSensorsToStore());
+    dispatch(fetchSensors());
   }, [dispatch]);
   
   return (
