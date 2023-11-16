@@ -13,13 +13,12 @@ import { useAppDispatch, useAppSelector } from "../../store/store";
 import { buttonStyles, container, listItemStyles, listStyles } from "@/components/SensorTable/styles";
 import { createNewSensor } from "@/store/sensors/action";
 import { fetchSensors } from "../../store/sensors/action";
-import SensorDetails from "../SensorDetails/SensorDetails";
+import SensorDetails from "@/components/sensorDetails/SensorDetails";
 import AddSensorModal from "../addSensorModal/SensorModal";
 type NewSensor = Pick<ISensor, "ip" | "name">;
 
 const SensorTable = () => {
   const { sensors } = useAppSelector((state) => state.sensorReducer);
-  console.log(sensors, "sensors");
   const dispatch = useAppDispatch();
   const [openSensors, setOpenSensors] = useState<string[]>([]);
   const [isAddSensorModalOpen, setAddSensorModalOpen] = useState(false);

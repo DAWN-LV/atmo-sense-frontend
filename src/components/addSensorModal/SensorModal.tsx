@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent } from "react";
+import React from "react";
 import {
   Modal,
   Box,
@@ -8,6 +8,9 @@ import {
   IconButton,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import { container, modalWindowStyles } from "./styles";
 
 interface AddSensorModalProps {
   open: boolean;
@@ -20,56 +23,26 @@ const AddSensorModal: React.FC<AddSensorModalProps> = ({
   onClose,
   onAddSensor,
 }) => {
-  const [newSensorData, setNewSensorData] = useState({
-    ip: "",
-    name: "",
-  });
-
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setNewSensorData({
-      ...newSensorData,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const handleAddSensor = () => {
-    const createdSensor = {
-      ip: newSensorData.ip,
-      name: newSensorData.name,
-    };
-
-    onAddSensor(createdSensor);
-
-    setNewSensorData({
+  const formik = useFormik({
+    initialValues: {
       ip: "",
       name: "",
-    });
-    onClose();
-  };
+    },
+    validationSchema: Yup.object({
+      ip: Yup.string().required("IP Address is required"),
+      name: Yup.string().required("Sensor Name is required"),
+    }),
+    onSubmit: (values) => {
+      onAddSensor(values);
+      formik.resetForm();
+      onClose();
+    },
+  });
 
   return (
     <Modal open={open}>
-      <Box
-        sx={{
-          position: "absolute",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          bgcolor: "background.paper",
-          boxShadow: 35,
-          p: 4,
-          width: 600,
-          border: "1px solid #808080",
-          borderRadius: "10px",
-        }}
-      >
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-between",
-          }}
-        >
+      <Box sx={modalWindowStyles}>
+        <Box sx={container}>
           <Typography variant="h6" gutterBottom>
             Add New Sensor
           </Typography>
@@ -77,32 +50,40 @@ const AddSensorModal: React.FC<AddSensorModalProps> = ({
             <CloseIcon sx={{ fontSize: "30px", color: "#808080" }} />
           </IconButton>
         </Box>
-        <TextField
-          label="Sensor Name"
-          name="name"
-          value={newSensorData.name}
-          onChange={handleInputChange}
-          margin="normal"
-          fullWidth
-          sx={{ color: "#808080" }}
-        />
-        <TextField
-          label="IP Address"
-          name="ip"
-          value={newSensorData.ip}
-          onChange={handleInputChange}
-          margin="normal"
-          fullWidth
-          sx={{ color: "#808080" }}
-        />
-        <Button
-          onClick={handleAddSensor}
-          variant="contained"
-          color="primary"
-          sx={{ mt: 2 }}
-        >
-          Add Sensor
-        </Button>
+        <form onSubmit={formik.handleSubmit}>
+          <TextField
+            label="Sensor Name"
+            name="name"
+            value={formik.values.name}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            error={formik.touched.name && Boolean(formik.errors.name)}
+            helperText={formik.touched.name && formik.errors.name}
+            margin="normal"
+            fullWidth
+            sx={{ color: "#808080" }}
+          />
+          <TextField
+            label="IP Address"
+            name="ip"
+            value={formik.values.ip}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            error={formik.touched.ip && Boolean(formik.errors.ip)}
+            helperText={formik.touched.ip && formik.errors.ip}
+            margin="normal"
+            fullWidth
+            sx={{ color: "#808080" }}
+          />
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            sx={{ mt: 2 }}
+          >
+            Add Sensor
+          </Button>
+        </form>
       </Box>
     </Modal>
   );
