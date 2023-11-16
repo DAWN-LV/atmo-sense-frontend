@@ -10,11 +10,11 @@ import {
 } from "@mui/material";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { useAppDispatch, useAppSelector } from "../../store/store";
-import { buttonStyles, container, listItemStyles, listStyles } from "./styles";
-import SensorDetails from "../sensorDetails/SensorDetails";
-import { createNewSensor } from "../../store/sensors/actionCreateSensor";
+import { buttonStyles, container, listItemStyles, listStyles } from "@/components/SensorTable/styles";
+import { createNewSensor } from "@/store/sensors/action";
 import { fetchSensors } from "../../store/sensors/action";
-import AddSensorModal from "../addSensorModal/sensorModal";
+import SensorDetails from "../SensorDetails/SensorDetails";
+import AddSensorModal from "../addSensorModal/SensorModal";
 type NewSensor = Pick<ISensor, "ip" | "name">;
 
 const SensorTable = () => {
@@ -55,10 +55,11 @@ const SensorTable = () => {
           Add new sensor
         </Button>
       </Box>
-      {sensors &&
-        sensors.map((sensor) => (
+
+      {sensors && sensors.map((sensor) => (
           <ListItem key={sensor.ip} sx={listItemStyles}>
             <Box sx={{ fontWeight: "500" }}>{sensor.name}</Box>
+
             <Box sx={container}>
               <Alert
                 severity={sensor.status === "working" ? "success" : "error"}
@@ -70,9 +71,11 @@ const SensorTable = () => {
               >
                 {sensor.status}
               </Alert>
+
               <IconButton onClick={() => handleIconClick(sensor.mac)}>
                 <KeyboardArrowDownIcon sx={{ fontSize: "30px" }} />
               </IconButton>
+
               <Collapse
                 in={openSensors.includes(sensor.mac)}
                 timeout="auto"
@@ -82,7 +85,8 @@ const SensorTable = () => {
               </Collapse>
             </Box>
           </ListItem>
-        ))}
+      ))}
+
       <AddSensorModal
         open={isAddSensorModalOpen}
         onClose={handleCloseAddSensorModal}

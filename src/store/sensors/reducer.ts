@@ -4,7 +4,6 @@ import { createStatus } from "../../utils/storeUtils";
 
 const initialState: ISensorStore = {
   sensors: [],
-  newsensor: [],
   isLoading: false,
   status: createStatus({ code: 0 }),
 };
@@ -16,8 +15,6 @@ const sensorReducer: Reducer<ISensorStore, SensorsActionTypes> = (
   switch (action.type) {
     case SensorActionTypes.SET_SENSORS:
       return { ...state, sensors: action.payload };
-    case SensorActionTypes.SET_NEW_SENSOR:
-      return { ...state, newsensor: [...state.newsensor, ...action.payload] };
     case SensorActionTypes.SET_SENSORS_LOADING:
       return { ...state, isLoading: action.payload };
     case SensorActionTypes.SET_SENSORS_STATUS:
