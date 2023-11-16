@@ -1,10 +1,9 @@
-// import AuthPage from './pages/auth/AuthPage.tsx'
-import SensorTable from './pages/auth/components/SensorTable.tsx'
+import MainPage from './pages/Home.tsx'
 
 function App() {
   return (
     <>
-      <SensorTable/>
+      <MainPage/>
     </>
   )
 }
