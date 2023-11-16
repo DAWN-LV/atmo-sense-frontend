@@ -1,5 +1,5 @@
-import Header from "../components/Header/Header";
-import SensorTable from "../components/SensorTable/SensorTable";
+import Header from "../components/header/Header";
+import SensorTable from "../components/sensorTable/SensorTable";
 
 const MainPage: React.FC = () => {
   return (

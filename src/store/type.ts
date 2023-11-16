@@ -1,6 +1,7 @@
 import { ThunkAction } from 'redux-thunk';
 import { AppStateType } from './store';
 import { SensorsActionTypes } from './sensors/type';
+import { NewSensorsActionTypes } from './createSensor/type';
 
 export interface SetBoolean<T> {
     type: T
@@ -17,6 +18,6 @@ export interface SetStatus<T> {
     payload: IStatus
 }
 
-type AppActions = SensorsActionTypes
+type AppActions = SensorsActionTypes | NewSensorsActionTypes
 
 export type ThunkResult<R> = ThunkAction<Promise<R>, AppStateType, unknown, AppActions>

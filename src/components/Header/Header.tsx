@@ -14,7 +14,6 @@ const Header = () => {
         <MenuIcon sx={{ fontSize: "40px", color: "#fff" }} />
       </IconButton>
       <img src={logo} style={imgStyles}/>
-      
     </Box>
   );
 };

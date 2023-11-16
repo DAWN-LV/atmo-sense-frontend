@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import {
   List,
   ListItem,
@@ -9,15 +10,19 @@ import {
 } from "@mui/material";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { useAppDispatch, useAppSelector } from "../../store/store";
-import { useEffect, useState } from "react";
+import { buttonStyles, container, listItemStyles, listStyles } from "./styles";
+import SensorDetails from "../sensorDetails/SensorDetails";
+import { createNewSensor } from "../../store/sensors/actionCreateSensor";
 import { fetchSensors } from "../../store/sensors/action";
-import { buttonStyles, container, listItemStyles, listStyles } from "./style";
-import SensorDetails from "../SensorDetails/SensorDetails";
+import AddSensorModal from "../addSensorModal/sensorModal";
+type NewSensor = Pick<ISensor, "ip" | "name">;
 
-const SensorTable: React.FC = () => {
+const SensorTable = () => {
   const { sensors } = useAppSelector((state) => state.sensorReducer);
+  console.log(sensors, "sensors");
   const dispatch = useAppDispatch();
   const [openSensors, setOpenSensors] = useState<string[]>([]);
+  const [isAddSensorModalOpen, setAddSensorModalOpen] = useState(false);
 
   useEffect(() => {
     dispatch(fetchSensors());
@@ -31,14 +36,28 @@ const SensorTable: React.FC = () => {
     );
   };
 
+  const handleOpenAddSensorModal = () => {
+    setAddSensorModalOpen(true);
+  };
+
+  const handleCloseAddSensorModal = () => {
+    setAddSensorModalOpen(false);
+  };
+
+  const handleAddSensor = (newSensorData: NewSensor) => {
+    dispatch(createNewSensor(newSensorData));
+  };
+
   return (
     <List sx={listStyles}>
       <Box sx={{ display: "flex", justifyContent: "right" }}>
-        <Button sx={buttonStyles}>Add new sensor</Button>
+        <Button sx={buttonStyles} onClick={handleOpenAddSensorModal}>
+          Add new sensor
+        </Button>
       </Box>
       {sensors &&
         sensors.map((sensor) => (
-          <ListItem key={sensor.mac} sx={listItemStyles}>
+          <ListItem key={sensor.ip} sx={listItemStyles}>
             <Box sx={{ fontWeight: "500" }}>{sensor.name}</Box>
             <Box sx={container}>
               <Alert
@@ -64,6 +83,11 @@ const SensorTable: React.FC = () => {
             </Box>
           </ListItem>
         ))}
+      <AddSensorModal
+        open={isAddSensorModalOpen}
+        onClose={handleCloseAddSensorModal}
+        onAddSensor={handleAddSensor}
+      />
     </List>
   );
 };
