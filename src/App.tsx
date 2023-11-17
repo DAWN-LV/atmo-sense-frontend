@@ -1,12 +1,9 @@
-// import AuthPage from './pages/auth/AuthPage.tsx'
-import SensorTable from './pages/auth/components/SensorTable.tsx'
+import { RouterProvider } from "react-router-dom"
 
-function App() {
-  return (
-    <>
-      <SensorTable/>
-    </>
-  )
+import router from "@/plugin/router"
+
+const App: React.FC = () => {
+  return <RouterProvider router={ router }/>
 }
 
 export default App
