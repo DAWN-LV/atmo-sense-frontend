@@ -1,9 +1,9 @@
-import MainPage from './pages/Home.tsx'
+import AppRouter from "./routes/appRouter"
 
 function App() {
   return (
     <>
-      <MainPage/>
+      <AppRouter/>
     </>
   )
 }

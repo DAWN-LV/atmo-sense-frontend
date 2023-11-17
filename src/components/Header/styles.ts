@@ -1,7 +1,7 @@
 export const headerStyles = {
   display: "flex",
   height: "6rem",
-  backgroundColor: "#318CE7",
+  backgroundColor: "#2c2f33",
   boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.5)",
   gap: "10px",
   position: "fixed",
@@ -19,10 +19,4 @@ export const burgerIconStyles = {
   marginLeft: "1rem",
 };
 
-export const imgStyles = {
-//   display: "flex",
-//   alignItems: "center",
-//   justifyContent: "center",
-//   width: "140px",
-//   height: "80px",
-};
+

@@ -11,6 +11,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { container, modalWindowStyles } from "./styles";
+import { useAppSelector } from "@/store/store";
 
 interface AddSensorModalProps {
   open: boolean;
@@ -23,6 +24,8 @@ const AddSensorModal: React.FC<AddSensorModalProps> = ({
   onClose,
   onAddSensor,
 }) => {
+  const { sensors } = useAppSelector((state) => state.sensorReducer);
+
   const formik = useFormik({
     initialValues: {
       ip: "",
@@ -32,7 +35,25 @@ const AddSensorModal: React.FC<AddSensorModalProps> = ({
       ip: Yup.string().required("IP Address is required"),
       name: Yup.string().required("Sensor Name is required"),
     }),
-    onSubmit: (values) => {
+    onSubmit: (values, { setSubmitting }) => {
+      const isDuplicateName = sensors.some(
+        (sensor) => sensor.name === values.name
+      );
+
+      const isDuplicateIp = sensors.some((sensor) => sensor.ip === values.ip);
+
+      if (isDuplicateName) {
+        formik.setFieldError("name", "Sensor with this name already exists");
+        setSubmitting(false);
+        return;
+      }
+
+      if (isDuplicateIp) {
+        formik.setFieldError("ip", "Sensor with this IP already exists");
+        setSubmitting(false);
+        return;
+      }
+
       onAddSensor(values);
       formik.resetForm();
       onClose();
