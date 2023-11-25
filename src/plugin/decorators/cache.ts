@@ -8,10 +8,9 @@ const cacheOut = (key: string): MethodDecorator => {
     const originalMethod = descriptor.value
 
     descriptor.value = function(...args: any[]) {
-      const cachedData = localStorage.getItem(key)
-      if (cachedData) {
-        const jsonData = JSON.parse(cachedData);
-        return originalMethod.apply(this, [jsonData, ...args])
+      const data = cache.get(key)
+      if (data) {
+        return originalMethod.apply(this, [data, ...args])
       }
 
       return originalMethod.apply(this, args)
@@ -30,7 +29,7 @@ const cacheIn = (key: string): MethodDecorator => {
     descriptor.value = function(...args: any[]) {
       const result = originalMethod.apply(this, args)
       if (result !== undefined && result !== null) {
-        localStorage.setItem(key, JSON.stringify(result))
+        cache.set(key, JSON.stringify(result))
       }
 
       return result

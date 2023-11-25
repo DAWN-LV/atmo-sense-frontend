@@ -2,6 +2,7 @@ import SessionModel from "@/store/session/SessionModel"
 import { assertDefined } from "@/utils"
 import { makeAutoObservable } from "mobx"
 import { SessionDTO } from "./types"
+import { cacheIn, cacheOut } from "@/plugin/decorators/cache"
 
 export default class SessionStore {
   private _session: SessionModel | undefined = undefined
