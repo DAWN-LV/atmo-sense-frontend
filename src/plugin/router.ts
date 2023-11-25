@@ -1,4 +1,6 @@
-import routes from "@/routes"
+import { unauthorizedUserRoutes, authorizedUserRoutes } from "@/routes"
 import { createBrowserRouter } from "react-router-dom"
 
-export default createBrowserRouter(routes)
+export const getAppRoutes = (isAuthorized: boolean) => {
+    return createBrowserRouter(isAuthorized ? authorizedUserRoutes : unauthorizedUserRoutes)
+}

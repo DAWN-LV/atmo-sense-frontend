@@ -1,9 +1,13 @@
+import { observer } from 'mobx-react-lite'
 import { RouterProvider } from "react-router-dom"
 
-import router from "@/plugin/router"
+import { getAppRoutes } from "@/plugin/router"
+import { useAppStore } from '@/hooks/useAppStore'
 
 const App: React.FC = () => {
-  return <RouterProvider router={ router }/>
+  const { sessionStore: { session } } = useAppStore()
+
+  return <RouterProvider router={ getAppRoutes(!!session?.isValid) }/>
 }
 
-export default App
+export default observer(App)
