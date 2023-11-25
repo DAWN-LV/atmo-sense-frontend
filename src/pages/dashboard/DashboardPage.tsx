@@ -1,9 +1,9 @@
-const DashboardPage: React.FC = () => {
-  return (
-    <>
-      Dashboard
-    </>
-  )
-}
+import Page from "@/components/Page"
+
+const DashboardPage: React.FC = () => (
+  <Page breadcrumb={ ['dashboard'] }>
+    <div>Dashboard</div>
+  </Page>
+)
 
 export default DashboardPage

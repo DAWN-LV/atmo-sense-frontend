@@ -1,5 +1,5 @@
+import { SensorDTO } from "@/store/sensor/types"
 import { makeAutoObservable } from "mobx"
-import { SensorDTO } from "./types"
 
 export default class SensorModel {
   readonly id: number

@@ -1,7 +1,7 @@
-import React from "react"
 import Icon from '@/components/icon/Icon.tsx'
 import { NavLink } from "react-router-dom"
 import { IconName } from "@/components/icon"
+import React from 'react'
 
 export interface Props {
   label: string, 
@@ -9,20 +9,43 @@ export interface Props {
   to: string
 }
 
-const defaultStyle = "flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:bg-gray-900 dark:text-white dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+const IconWrapper: React.FC<{ isActive: boolean; icon: IconName }> = ({ isActive, icon }) => (
+  <div 
+    className={`
+      ${ isActive ? "bg-blue-600 text-white" : "bg-white" }
+      flex justify-center items-center h-8 w-8
+      rounded-lg mr-2 shadow-sm
+    `}
+  >
+    <Icon name={icon} />
+  </div>
+)
 
-const Link: React.FC<Props> = ({ label, icon, to }) => {
-  return (
-    <li>
-      <NavLink 
-        to={ to } 
-        className={({ isActive }) => `${ isActive ? "bg-gray-100" : "" } ${ defaultStyle }` }
+const LabelWrapper: React.FC<{ isActive: boolean; label: string }> = ({ isActive, label }) => (
+  <span className={`${ isActive && "font-bold" } ml-1`}>{label}</span>
+)
+
+const LinkWrapper: React.FC<Props> = ({ label, icon, to }) => (
+  <NavLink to={ to }>
+    {({ isActive }) => (
+      <div
+        className={`
+          ${ isActive ? "bg-white shadow-sm" : "hover:bg-gray-200" }
+          py-2.5 text-sm mx-4 flex items-center
+          whitespace-nowrap px-4 rounded-lg
+        `}
       >
-        <Icon name={ icon }/>
-        { label }
-      </NavLink>
-    </li>
-  )
-}
+        <IconWrapper isActive={ isActive } icon={ icon }/>
+        <LabelWrapper isActive={ isActive } label={ label }/>
+      </div>
+    )}
+  </NavLink>
+)
+
+const Link: React.FC<Props> = (props) => (
+  <li className="mt-1 w-full">
+    <LinkWrapper { ...props }/>
+  </li>
+)
 
 export default Link

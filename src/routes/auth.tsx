@@ -1,6 +1,22 @@
+import { lazy } from "react"
 import { RouteObject } from "react-router-dom"
 
-// TODO: Add auth routes
-const route: RouteObject = {}
+const AuthPage = lazy(() => import("@/pages/auth/AuthPage"))
+const LoginForm = lazy(() => import("@/pages/auth/login/LoginForm"))
 
-export default route
+const routes: RouteObject = {
+  path: "auth",
+  element: <AuthPage/>,
+  children: [
+    {
+      path: 'login',
+      element: <LoginForm/>
+    },
+    // {
+    //   path: 'register',
+    //   element: <RegisterPage/>
+    // }
+  ]
+}
+
+export default routes

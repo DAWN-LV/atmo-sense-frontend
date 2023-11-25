@@ -7,7 +7,7 @@ const RootLayout: React.FC = () => {
   return (
     <>
       <Header/>
-      <div className="w-full lg:ps-64">
+      <div className="w-full lg:ps-72">
         {/* TODO: Change fallback component */}
         <Suspense fallback={ <div>Loading...</div> }> 
           <Outlet/>

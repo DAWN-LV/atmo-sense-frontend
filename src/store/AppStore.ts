@@ -1,11 +1,14 @@
-import useAsyncState from "@/hooks/useAsyncState"
+import useAsyncState from "@/hooks/mobx/useAsyncState"
 import SensorStore from "@/store/sensor/SensorStore"
+import SessionStore from "./session/SessionStore"
 
 export default class AppStore {
   readonly sensorStore
+  readonly sessionStore
   
   constructor() {
     this.sensorStore = this.createSensorStore()
+    this.sessionStore = this.createSessionStore()
 
     this.setupConnections()
   }
@@ -16,6 +19,10 @@ export default class AppStore {
 
   private createSensorStore() {
     return new SensorStore()
+  }
+
+  private createSessionStore() {
+    return new SessionStore()
   }
 
   private setupConnections() {
