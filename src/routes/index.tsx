@@ -6,7 +6,7 @@ import dashboard from '@/routes/dashboard'
 import documentation from '@/routes/documentation'
 import sensors from '@/routes/sensors'
 
-export const unauthorizedUserRoutes: RouteObject[] = [
+export const publicRoutes: RouteObject[] = [
   auth,
   {
     path: "*",
@@ -14,7 +14,7 @@ export const unauthorizedUserRoutes: RouteObject[] = [
   }
 ]
 
-export const authorizedUserRoutes: RouteObject[] = [
+export const privateRoutes: RouteObject[] = [
   {
     path: '/',
     element: <RootLayout/>,
@@ -26,6 +26,6 @@ export const authorizedUserRoutes: RouteObject[] = [
   },
   {
     path: "*",
-    element: <Navigate to={`/${dashboard.path}`} replace />
+    element: <Navigate to={`/${dashboard.path}`} replace/>
   }
 ]

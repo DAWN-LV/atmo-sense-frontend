@@ -7,7 +7,9 @@ import { useAppStore } from '@/hooks/useAppStore'
 const App: React.FC = () => {
   const { sessionStore: { session } } = useAppStore()
 
-  return <RouterProvider router={ getAppRoutes(!!session?.isValid) }/>
+  return (
+    <RouterProvider router={ getAppRoutes(!!session?.isValid) }/>
+  )
 }
 
 export default observer(App)

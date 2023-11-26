@@ -1,6 +1,6 @@
-import { unauthorizedUserRoutes, authorizedUserRoutes } from "@/routes"
+import { privateRoutes, publicRoutes } from "@/routes"
 import { createBrowserRouter } from "react-router-dom"
 
 export const getAppRoutes = (isAuthorized: boolean) => {
-    return createBrowserRouter(isAuthorized ? authorizedUserRoutes : unauthorizedUserRoutes)
+  return createBrowserRouter(isAuthorized ? privateRoutes : publicRoutes)
 }
