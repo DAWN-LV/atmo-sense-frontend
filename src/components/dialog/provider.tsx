@@ -9,7 +9,7 @@ import {
 const Context = React.createContext<DialogContextType | undefined>(undefined)
 
 export const DialogProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [dialog, setDialog] = useState<OpenDialogParams | undefined>(undefined)
+  const [ dialog, setDialog ] = useState<OpenDialogParams | undefined>(undefined)
 
   const openDialog = useCallback((components: DialogComponentType, props: DialogProps = { closeDialog }, options: any = {}) => {
     setDialog({ components, props, options })
