@@ -5,10 +5,10 @@ import { getAppRoutes } from "@/plugin/router"
 import { useAppStore } from '@/hooks/useAppStore'
 
 const App: React.FC = () => {
-  const { sessionStore: { session } } = useAppStore()
+  const { sessionStore } = useAppStore()
 
   return (
-    <RouterProvider router={ getAppRoutes(!!session?.isValid) }/>
+    <RouterProvider router={ getAppRoutes(sessionStore.isValid) }/>
   )
 }
 

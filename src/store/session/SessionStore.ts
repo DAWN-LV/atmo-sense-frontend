@@ -1,7 +1,8 @@
-import SessionModel from "@/store/session/SessionModel"
 import { makeAutoObservable } from "mobx"
+import SessionModel from "@/store/session/SessionModel"
 import { SessionDTO } from "@/store/session/types"
 import LocalStorage from "@/plugin/LocalStorage"
+import { assertDefined } from "@/utils"
 import config from "@/config"
 
 const cache = new LocalStorage(localStorage, config.app.title);
@@ -16,7 +17,11 @@ export default class SessionStore {
   }
 
   get session() {
-    return this._session
+    return assertDefined(this._session, "Can not get session. You are not authenticated.") 
+  }
+
+  get isValid() {
+    return !!this._session?.isValid
   }
 
   authenticate(dto: SessionDTO) {
