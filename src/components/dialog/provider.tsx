@@ -1,4 +1,6 @@
-import React, { useState, useCallback } from "react"
+import React, { useState, useCallback, useContext } from "react"
+import { WithChildren } from "@/utils/types"
+import { assertDefined } from "@/utils"
 import { 
   DialogProps, 
   DialogContextType, 
@@ -8,7 +10,14 @@ import {
 
 const Context = React.createContext<DialogContextType | undefined>(undefined)
 
-export const DialogProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const useDialog = (): DialogContextType => {
+  return assertDefined(
+    useContext(Context),
+    'Dialog is not provided.'
+  )
+}
+
+export function DialogProvider({ children }: WithChildren) {
   const [ dialog, setDialog ] = useState<OpenDialogParams | undefined>(undefined)
 
   const openDialog = useCallback((components: DialogComponentType, props: DialogProps = { closeDialog }, options: any = {}) => {

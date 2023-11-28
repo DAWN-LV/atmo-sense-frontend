@@ -1,5 +1,9 @@
+import Page from "@/components/Page"
+
 const DocumentationPage: React.FC = () => (
-  <div>Documentations Page</div>
+  <Page breadcrumb={ ['documentation'] }>
+    
+  </Page>
 )
 
 export default DocumentationPage

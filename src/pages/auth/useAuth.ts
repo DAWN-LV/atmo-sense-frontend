@@ -1,4 +1,4 @@
-import { useAppStore } from "@/hooks/useAppStore"
+import { useAppStore } from '@/store/provider'
 import AuthApi from "@/pages/auth/AuthApi"
 
 

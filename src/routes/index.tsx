@@ -26,6 +26,6 @@ export const privateRoutes: RouteObject[] = [
   },
   {
     path: "*",
-    element: <Navigate to={`/${dashboard.path}`} replace/>
+    element: <Navigate to={ `/${dashboard.path}` } replace/>
   }
 ]

@@ -29,6 +29,12 @@ export default class SessionStore {
     this.saveCache()
   }
 
+  // TODO: Not Safe - Add backend side to logout
+  logout() {
+    this._session = undefined
+    cache.remove('session')
+  }
+
   private restoreCache() {
     const json = cache.get<SessionDTO>('session')
     if (json) {

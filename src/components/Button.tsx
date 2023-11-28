@@ -27,9 +27,17 @@ const Button: React.FC<Props> = ({ type = "button", label, icon, loading, varian
       className={ `flex items-center w-full gap-x-2 justify-center px-4 py-2 rounded-md shadow-sm transition ease-in-out duration-150 ${ !flat && "border" } ${ variantClass }` }
       onClick={ onClick }  
     >
-      { loading && <Spinner/> }
-      { icon && <Icon name={ icon }/> }
-      { label && <span className="font-semibold flex-grow truncate">{ label }</span> }
+      { loading ? (
+        <Spinner/>
+      ) : null }
+
+      { icon ? (
+        <Icon name={ icon }/>
+      ) : null }
+
+      { label ? (
+        <span className="font-semibold flex-grow truncate">{ label }</span>
+      ) : null }
     </button>
   )
 }

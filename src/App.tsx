@@ -1,14 +1,23 @@
-import { observer } from 'mobx-react-lite'
-import { RouterProvider } from "react-router-dom"
-
-import { getAppRoutes } from "@/plugin/router"
-import { useAppStore } from '@/hooks/useAppStore'
+import { RouterProvider, createBrowserRouter } from "react-router-dom"
+import { privateRoutes, publicRoutes } from "@/routes"
+import { useAppStore } from '@/store/provider'
+import LoadingLayout from "@/layouts/LoadingLayout"
+import { observer } from "mobx-react-lite"
+import React from "react"
 
 const App: React.FC = () => {
-  const { sessionStore } = useAppStore()
+  const { sessionStore, load } = useAppStore()
+
+  const getRoutes = (isValid: boolean) => {
+    return createBrowserRouter(isValid ? privateRoutes : publicRoutes)
+  }
+
+  if (load.isPending) {
+    return <LoadingLayout/>
+  }
 
   return (
-    <RouterProvider router={ getAppRoutes(sessionStore.isValid) }/>
+    <RouterProvider router={ getRoutes(sessionStore.isValid) }/>
   )
 }
 

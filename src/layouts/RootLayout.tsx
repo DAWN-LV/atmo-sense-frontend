@@ -1,7 +1,7 @@
 import { Suspense } from "react"
 import { Outlet } from "react-router-dom"
-import Header from "@/layouts/Header"
-import Drawer from "@/layouts/drawer/Drawer"
+import Header from "@/layouts/components/header/Header"
+import Drawer from "@/layouts/components/drawer/Drawer"
 
 const RootLayout: React.FC = () => {
   return (

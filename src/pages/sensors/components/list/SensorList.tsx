@@ -2,11 +2,11 @@ import React from 'react'
 import Button from "@/components/Button"
 import SensorDialog from '@/pages/sensors/components/dialog/SensorDialog'
 import SensorItem from '@/pages/sensors/components/list/SensorItem'
-import { useDialog } from '@/hooks/useDialog'
-import { useAppStore } from '@/hooks/useAppStore'
+import { useDialog } from '@/components/dialog/provider'
+import { useAppStore } from '@/store/provider'
 import { observer } from 'mobx-react-lite'
 
-const SensorList: React.FC = observer(() => {
+const SensorList: React.FC = () => {
   const { sensorStore: { sensors } } = useAppStore()
   const { openDialog } = useDialog()
 
@@ -25,6 +25,6 @@ const SensorList: React.FC = observer(() => {
       ))}
     </div>
   )
-})
+}
 
-export default SensorList
+export default observer(SensorList)

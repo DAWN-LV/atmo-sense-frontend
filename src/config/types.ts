@@ -1,6 +1,6 @@
 export interface Config { 
   app: AppConfig,
-  api: ApiConfig
+  api: ApiConfig,
 }
 
 export interface AppConfig {

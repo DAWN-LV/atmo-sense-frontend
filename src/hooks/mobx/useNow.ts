@@ -13,5 +13,5 @@ export const useNow = ({ interval }: Options) => {
     })
   }, interval)
 
-  return time.current
+  return time
 }

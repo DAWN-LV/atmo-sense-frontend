@@ -1,4 +1,4 @@
-import Link, { Props } from "@/layouts/drawer/components/Link"
+import Link, { Props } from "@/layouts/components/drawer/components/Link"
 
 const options: Props[] = [
   { to: "/dashboard", label: "Dashboard", icon: "gauge" },
@@ -6,6 +6,7 @@ const options: Props[] = [
   { to: "/documentation", label: "Docs", icon: "box_archive" },
 ]
 
+// TODO: use public Link component
 const Drawer = () => {
   return (
     <div className="-translate-x-full transform hidden fixed top-0 start-0 bottom-0 w-72 pt-16 pb-10 lg:block lg:translate-x-0">
