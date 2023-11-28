@@ -23,9 +23,6 @@ const AuthPage: React.FC = () => (
           </div>
         </div>
         <Outlet/>
-        <div className="flex items-center justify-center mt-5">
-          {/* TODO: Helpers */}
-        </div>
       </div>
     </div>
     <div className="relative hidden md:block md:w-1/2 bg-wedges-purple-600 overflow-hidden">

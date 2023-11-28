@@ -17,15 +17,18 @@ const Dismissible: React.FC<{ notification: NotificationModel }> = ({ notificati
 
 const Notifications: React.FC = () => {
   const notifications = useNotification()
-
   const sliced = useMemo(() => notifications.active.slice(0, 4), [notifications.active])
 
   return (
-    <div className="fixed bottom-2 right-5 w-80 z-50">
-      {sliced.map(notification => (
-        <Dismissible key={ notification.message } notification={ notification }/>
-      ))}
-    </div>
+    <>
+      { sliced.length ? (
+        <div className="fixed left-0 w-screen flex flex-col items-end p-5 z-50">
+          {sliced.map(notification => (
+            <Dismissible key={ notification.message } notification={ notification }/>
+          ))}
+        </div>
+      ) : null }
+    </>
   )
 }
 

@@ -4,6 +4,7 @@ import TextField from "@/components/form/TextField"
 import PasswordField from "@/components/form/PasswordField"
 import Button from "@/components/Button"
 import { useNotification } from "@/store/notification/provider"
+import { Link } from "react-router-dom"
 
 interface FormData {
   email: string
@@ -30,6 +31,9 @@ const LoginForm: React.FC = () => {
         <TextField name="email" label="Email"/>
         <PasswordField name="password" label="Password"/>
         <Button type="submit" variant="primary" label="Sign in"/>
+        <div className="flex justify-center mt-5">
+          Don't have an account?<Link to="/auth/register" className="text-blue-600">Register</Link>
+        </div>
       </form>
     </FormProvider>
   )

@@ -1,19 +1,27 @@
 import { useState, cloneElement, useRef } from "react"
 import useClickOutside from "@/hooks/useClickOutside"
 
+interface WrapperProps {
+  children: React.ReactNode,
+  append?: React.ReactNode,
+  onClose: () => void
+} 
+
 interface Props {
   parent: React.ReactElement,
-  children: React.ReactNode
+  children: React.ReactNode,
+  append?: React.ReactNode
 }
 
 // TODO: Refactor dropdown component
 
-const Wrapper: React.FC<{ children: React.ReactNode, onClose: () => void }> = ({ children, onClose }) => {
+const Wrapper: React.FC<WrapperProps> = ({ children, append, onClose }) => {
   const wrapperRef = useRef<HTMLDivElement>(null)
   useClickOutside(wrapperRef, onClose)
 
   return (
     <div ref={ wrapperRef } className="absolute bottom-0 right-0 translate-y-[calc(100%+0.5rem)] z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+      { append }
       <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
         { children }
       </ul>
@@ -21,7 +29,7 @@ const Wrapper: React.FC<{ children: React.ReactNode, onClose: () => void }> = ({
   )
 }
 
-const Dropdown: React.FC<Props> = ({ parent, children }) => {
+const Dropdown: React.FC<Props> = ({ parent, children, append }) => {
   const [ isOpen, setIsOpen ] = useState(false)
   const parentElement = cloneElement(parent, { 
     onClick: (event: MouseEvent) => {
@@ -34,7 +42,11 @@ const Dropdown: React.FC<Props> = ({ parent, children }) => {
     <div className="relative flex items-center justify-center">
       { parentElement }
       { isOpen ? (
-        <Wrapper children={ children } onClose={ () => setIsOpen(false) }/>
+        <Wrapper 
+          children={ children } 
+          append={ append }
+          onClose={ () => setIsOpen(false) }
+        />
       ) : null}
     </div>
   )
