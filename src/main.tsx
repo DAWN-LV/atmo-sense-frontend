@@ -1,16 +1,16 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { Provider } from 'react-redux'
+import Notifications from '@/components/notification'
+import Providers from '@/providers'
+import App from '@/App.tsx'
 
-import App from './App.tsx'
-import { store } from './store/store.ts'
-
-import './index.css'
+import '@/assets/styles/index.css'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <Provider store={store}>
+    <Providers>
+      <Notifications/>
       <App/>
-    </Provider>
-  </React.StrictMode>,
+    </Providers>
+  </React.StrictMode>
 )

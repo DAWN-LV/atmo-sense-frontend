@@ -1,12 +1,24 @@
-// import AuthPage from './pages/auth/AuthPage.tsx'
-import SensorTable from './pages/auth/components/SensorTable.tsx'
+import React from "react"
+import { RouterProvider, createBrowserRouter } from "react-router-dom"
+import { privateRoutes, publicRoutes } from "@/routes"
+import LoadingLayout from "@/layouts/LoadingLayout"
+import { observer } from "mobx-react-lite"
+import { useAppStore } from "@/providers"
 
-function App() {
+const App: React.FC = () => {
+  const { sessionStore, load } = useAppStore()
+
+  const getRoutes = (isValid: boolean) => {
+    return createBrowserRouter(isValid ? privateRoutes : publicRoutes)
+  }
+
+  if (load.isPending) {
+    return <LoadingLayout/>
+  }
+
   return (
-    <>
-      <SensorTable/>
-    </>
+    <RouterProvider router={ getRoutes(sessionStore.isValid) }/>
   )
 }
 
-export default App
+export default observer(App)

@@ -1,6 +1,6 @@
-import HttpClient from "./services/http/HttpClient"
+import { mande } from "mande"
+import config from "@/config"
 
-// Need to create config files
-const http = new HttpClient('http://40.68.14.121:3000/api', 5_000)
+const http = mande(config.api.baseUrl)
 
 export { http }

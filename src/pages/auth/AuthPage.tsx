@@ -1,57 +1,38 @@
-import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
-import CssBaseline from '@mui/material/CssBaseline';
-import Paper from '@mui/material/Paper';
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
+import Button from "@/components/Button"
+import Logo from "@/components/Logo"
+import config from "@/config"
+import LoadingLayout from "@/layouts/LoadingLayout"
+import { Suspense } from "react"
+import { Outlet } from "react-router-dom"
 
-const AuthPage: React.FC = () => {
-  return (
-    <Grid container component="main" sx={{ height: '100vh' }}>
-      <CssBaseline/>
+const AuthPage: React.FC = () => (
+  <div className="flex min-h-screen dark:text-white">
+    <div className="w-full md:w-1/2 flex items-center dark:border bg-white dark:bg-gray-800 dark:border-gray-700">
+      <div className="w-full max-w-xl mx-auto px-4 py-15">
+        <div className="flex items-center justify-center">
+          <Logo/>
+        </div>
+        <div className="text-center my-5">
+          <h1 className="text-24 font-medium">Sign in to { config.app.title }</h1>
+        </div>
+        <div className="lg:flex lg:items-center mb-2">
+          <Button type="button" variant="light" icon="google" label="Sign in with Google"/>
+        </div>
+        <div className="relative flex items-center justify-center h-5 mb-2">
+          <div className="absolute top-[50%] w-full border-t border-light-95"/>
+          <div className="relative z-10 text-13 text-grey bg-white dark:bg-gray-800 px-2">
+            Or
+          </div>
+        </div>
+        <Suspense fallback={ <LoadingLayout/> }> 
+          <Outlet/>
+        </Suspense>
+      </div>
+    </div>
+    <div className="relative hidden md:block md:w-1/2 bg-wedges-purple-600 overflow-hidden">
+      {/* TODO: put image of Rospbery PI */}
+    </div>
+  </div>
+)
 
-      <Grid
-        item
-        xs={ false }
-        sm={ 4 }
-        md={ 7 }
-        sx={{
-          backgroundImage: 'url(https://source.unsplash.com/random?wallpapers)',
-          backgroundRepeat: 'no-repeat',
-          backgroundColor: (t) =>
-            t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-        }}
-      />
-
-      <Grid item xs={12} sm={8} md={5} component={ Paper } elevation={6} square>
-        <Box
-          sx={{
-            my: 8,
-            mx: 4,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon/>
-          </Avatar>
-
-          <Typography component="h1" variant="h5">
-            Sign in
-          </Typography>
-          
-          <Box component="form" noValidate sx={{ mt: 1 }}>
-            
-          </Box>
-        </Box>
-      </Grid>
-    </Grid>
-  );
-}
-
-export default AuthPage;
+export default AuthPage

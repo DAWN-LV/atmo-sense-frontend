@@ -1,13 +1,31 @@
-import { RouteObject } from "react-router-dom";
-import App from "../App";
-import auth from './auth'
+import { Navigate, RouteObject } from "react-router-dom"
+import RootLayout from "@/layouts/RootLayout"
 
-const routes: RouteObject[] = [
+import auth from '@/routes/internal/auth'
+import dashboard from '@/routes/internal/dashboard'
+import documentation from '@/routes/internal/documentation'
+import sensors from '@/routes/internal/sensors'
+
+export const publicRoutes: RouteObject[] = [
   auth,
   {
-    path: '/',
-    element: <App/>, // RootLayout with children
+    path: "*",
+    element: <Navigate to={`${auth.path}/login`} replace />
   }
 ]
 
-export default routes;
+export const privateRoutes: RouteObject[] = [
+  {
+    path: '/',
+    element: <RootLayout/>,
+    children: [ 
+      sensors, 
+      dashboard,  
+      documentation
+    ]
+  },
+  {
+    path: "*",
+    element: <Navigate to={ `/${dashboard.path}` } replace/>
+  }
+]
