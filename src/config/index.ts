@@ -5,7 +5,7 @@ const app: AppConfig = {
 }
 
 const api: ApiConfig = {
-  baseUrl: "http://127.0.0.1:3000/api",
+  baseUrl: "http://192.168.1.90:3000/api",
   timeout: 30_000
 }
 
