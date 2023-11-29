@@ -1,9 +1,8 @@
-import Icon from "@/components/icon/Icon"
+import Icon from "@/components/icon/internal/Icon"
+import { classNames } from "@/utils"
 
-const Spinner: React.FC = () => (
-  <div className="flex animate-spin">
-    <Icon name="circle_notch"/>
-  </div>
+const Spinner: React.FC<React.HTMLAttributes<HTMLSpanElement>> = ({ ...props }) => (
+  <Icon { ...props } name="circle_notch" className={ classNames("flex animate-spin", props.className) }/>
 )
 
 export default Spinner

@@ -1,13 +1,15 @@
+import config from "@/config"
 import LocalStorage from "@/plugin/LocalStorage"
 import { useEffect, useState } from "react"
 
-const storage = new LocalStorage(localStorage)
+const cache = new LocalStorage(localStorage, config.app.title)
 
 export function useDark() {
-  const [ isDark, setDark ] = useState(false)
+  const [ isDark, setDark ] = useState(Boolean(cache.get("theme::dark")))
 
   useEffect(() => { 
-    document.body.classList.toggle('dark', isDark) 
+    document.documentElement.classList.toggle("dark", isDark) 
+    cache.set("theme::dark", isDark)
   }, [ isDark ])
 
   return { isDark, setDark }

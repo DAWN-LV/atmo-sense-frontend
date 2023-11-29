@@ -1,21 +1,19 @@
 import { Suspense } from "react"
 import { Outlet } from "react-router-dom"
-import Header from "@/layouts/components/header/Header"
-import Drawer from "@/layouts/components/drawer/Drawer"
+import Header from "@/layouts/internal/header/Header"
+import Drawer from "@/layouts/internal/drawer/Drawer"
+import LoadingLayout from "@/layouts/LoadingLayout"
 
-const RootLayout: React.FC = () => {
-  return (
-    <>
-      <Header/>
-      <div className="w-full lg:ps-72">
-        {/* TODO: Change fallback component */}
-        <Suspense fallback={ <div>Loading...</div> }> 
-          <Outlet/>
-        </Suspense>
-      </div>
-      <Drawer/>
-    </>
-  )
-}
+const RootLayout: React.FC = () => (
+  <>
+    <Header/>
+    <div className="w-full lg:ps-72">
+      <Suspense fallback={ <LoadingLayout/> }> 
+        <Outlet/>
+      </Suspense>
+    </div>
+    <Drawer/>
+  </>
+)
 
 export default RootLayout

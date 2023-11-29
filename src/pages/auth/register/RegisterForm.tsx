@@ -1,10 +1,9 @@
+import { Link } from "react-router-dom"
 import { useForm, FormProvider } from "react-hook-form"
 import { useAuth } from "@/pages/auth/useAuth"
-import TextField from "@/components/form/TextField"
-import PasswordField from "@/components/form/PasswordField"
 import Button from "@/components/Button"
-import { useNotification } from "@/store/notification/provider"
-import { Link } from "react-router-dom"
+import { PasswordField, TextField } from "@/components/form"
+import { useNotification } from "@/providers"
 
 interface FormData {
   email: string

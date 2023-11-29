@@ -1,16 +1,20 @@
-import { useAppStore } from "@/store/provider"
-import Icon from "@/components/icon/Icon"
+import Icon from "@/components/icon"
+import { useAppStore } from "@/providers"
 
-const Avatar: React.FC<{ onClick?: () => void }> = ({ onClick }) => {
+const Avatar: React.FC<React.HTMLProps<HTMLDivElement>> = ({ ...props }) => {
   const { userStore: { user } } = useAppStore()
 
+  const AvatarContent = () => {
+    if (user.avatar) {
+      return <img src={ user.avatar } alt="Avatar"/>
+    }
+
+    return <Icon name="circle_user" className="w-9 h-9 text-3xl"/>
+  }
+
   return (
-    <div className="cursor-pointer rounded-full w-9 h-9" onClick={ onClick }>
-      { user.avatar ? (
-        <img src={ user.avatar } alt="Avatar"/>
-      ) : (
-        <Icon name="circle_user" className="w-9 h-9 text-3xl"/>
-      )}
+    <div { ...props } className="cursor-pointer rounded-full w-9 h-9">
+      <AvatarContent/>
     </div>
   )
 }

@@ -1,4 +1,4 @@
-import { observable } from "mobx"
+import { action, observable } from "mobx"
 
 interface State {
   state: 'idle' | 'pending' | 'fulfilled' | 'rejected'
@@ -35,15 +35,21 @@ export default function useAsyncState<T extends (...args: any[]) => Promise<any>
       return prop in state
     },
     apply(target: T, thisArg: any, argArray: any[]): any {
-      state.state = 'pending'
+      action('setPending', () => {
+        state.state = 'pending'
+      })()
 
       return target.apply(thisArg, argArray)
         .then(result => {
-          state.state = 'fulfilled'
+          action('setFulfilled', () => {
+            state.state = 'fulfilled'
+          })()
           return result
         })
         .catch(error => {
-          state.state = 'rejected'
+          action('setRejected', () => {
+            state.state = 'rejected'
+          })()
           throw error
         })
     },

@@ -5,7 +5,7 @@ import LocalStorage from "@/plugin/LocalStorage"
 import { assertDefined } from "@/utils"
 import config from "@/config"
 
-const cache = new LocalStorage(localStorage, config.app.title);
+const cache = new LocalStorage(localStorage, config.app.title)
 
 export default class SessionStore {
   private _session: SessionModel | undefined = undefined
@@ -36,7 +36,7 @@ export default class SessionStore {
   }
 
   private restoreCache() {
-    const json = cache.get<SessionDTO>('session')
+    const json = cache.get<SessionDTO>("session")
     if (json) {
       this.authenticate(json)
     }
@@ -44,7 +44,7 @@ export default class SessionStore {
 
   private saveCache() {
     if (this._session) {
-      cache.set('session', this._session.toJSON())
+      cache.set("session", this._session.toJSON())
     }
   }
 }

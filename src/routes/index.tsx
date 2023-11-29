@@ -1,10 +1,10 @@
 import { Navigate, RouteObject } from "react-router-dom"
 import RootLayout from "@/layouts/RootLayout"
 
-import auth from '@/routes/auth'
-import dashboard from '@/routes/dashboard'
-import documentation from '@/routes/documentation'
-import sensors from '@/routes/sensors'
+import auth from '@/routes/internal/auth'
+import dashboard from '@/routes/internal/dashboard'
+import documentation from '@/routes/internal/documentation'
+import sensors from '@/routes/internal/sensors'
 
 export const publicRoutes: RouteObject[] = [
   auth,

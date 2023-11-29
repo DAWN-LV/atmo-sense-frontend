@@ -1,9 +1,9 @@
+import React from "react"
 import { RouterProvider, createBrowserRouter } from "react-router-dom"
 import { privateRoutes, publicRoutes } from "@/routes"
-import { useAppStore } from '@/store/provider'
 import LoadingLayout from "@/layouts/LoadingLayout"
 import { observer } from "mobx-react-lite"
-import React from "react"
+import { useAppStore } from "@/providers"
 
 const App: React.FC = () => {
   const { sessionStore, load } = useAppStore()

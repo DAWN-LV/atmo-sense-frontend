@@ -19,7 +19,7 @@ const FixedLayout: React.FC<Props> = ({ header, children, footer }) => (
       </>
     )}
     
-    <div className="p-4 md:p-5 space-y-4">
+    <div className="p-4 md:p-5 space-y-4 text-gray-900 dark:text-white">
       { children }
     </div>
 
