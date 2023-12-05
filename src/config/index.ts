@@ -5,7 +5,7 @@ const app: AppConfig = {
 }
 
 const api: ApiConfig = {
-  baseUrl: `${location.host}:3000/api`,
+  baseUrl: `${location.hostname}:3000/api`,
   timeout: 30_000
 }
 
