@@ -19,7 +19,7 @@ export default class SensorStore {
   }
 
   private setSensor(dto: SensorDTO) {
-    const sensor = new SensorModel(dto)
+    const sensor = new SensorModel(this, dto)
     this.sensors.set(sensor.id, sensor)
     return sensor
   }

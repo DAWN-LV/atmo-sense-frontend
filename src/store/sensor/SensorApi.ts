@@ -9,4 +9,8 @@ export default abstract class SensorApi {
   static async create(dto: CreateSensorDTO) {
     return http.post<SensorDTO>("sensors", { ...dto })
   }
+
+  static async delete(id: number) {
+    return http.delete(`sensors/${ id }`)
+  }
 }
