@@ -22,10 +22,10 @@ const Accordion: React.FC<Props> = ({ title, children, prepend }) => {
             { prepend }
           </div>
         </div>
-        <div className={ classNames("overflow-hidden transition-max-height", isOpen ? "max-h-96" : "max-h-0") }>
+        <div className={ classNames("overflow-hidden transition-max-height", !isOpen ? "max-h-0" : "") }>
           <div className="p-5 border border-b-0 border-gray-200 dark:border-gray-700 dark:bg-gray-900">
             <div className="mb-2 text-gray-500 dark:text-gray-400">
-              { children }
+              { isOpen && children }
             </div>
           </div>
         </div>
