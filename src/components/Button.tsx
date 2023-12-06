@@ -2,16 +2,18 @@ import Spinner from "@/components/Spinner"
 import Icon, { IconName } from "@/components/icon"
 import { classNames } from "@/utils"
 
+export type ButtonVariant = "primary" | "negative" | "light" | "default"
+
 type Props = React.HTMLAttributes<HTMLSpanElement> & {
   type?: "button" | "submit",
-  variant?: "primary" | "negative" | "light" | "default",
+  variant?: ButtonVariant,
   label?: string,
   icon?: IconName,
   loading?: boolean,
   onClick?: () => void
 }
 
-const variantClass: Record<Exclude<Props["variant"], undefined>, string> = {
+const variantClass: Record<ButtonVariant, string> = {
   "light": "bg-white text-black hover:bg-white-700 border-white-700",
   "negative": "bg-red-600 text-white hover:bg-red-700 border-gray-700",
   "primary": "bg-blue-600 text-white hover:bg-blue-700 border-gray-700",

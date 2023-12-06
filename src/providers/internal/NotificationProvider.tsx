@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react"
 import NotificationStore from "@/store/notification/NotificationStore"
-import { WithChildren } from "@/utils/types"
+import { WithChildren } from "@/providers/types"
 import { assertDefined } from "@/utils"
 
 const Context = React.createContext<NotificationStore | undefined>(undefined)
