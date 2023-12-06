@@ -20,6 +20,16 @@ export default abstract class AuthApi {
     }
   }
 
+  static async googleAuth() {
+    try {
+      const dto = await http.get<SessionDTO>('auth/google')
+      console.log(dto)
+      return 
+    } catch (error) {
+      AuthApi.handleError(error)
+    }
+  }
+
   private static handleSuccess(dto: SessionDTO): SessionDTO {
     return {
       expiresAt: Number(dto.expiresAt),

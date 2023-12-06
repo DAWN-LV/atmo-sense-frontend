@@ -13,6 +13,9 @@ export function useAuth() {
     async register(email: string, username: string, password: string) {
       const dto = await AuthApi.register(email.toLowerCase(), username.toLocaleLowerCase(), password)
       sessionStore.authenticate(dto)
+    },
+    async googleAuth() {
+      const dto = await AuthApi.googleAuth()
     }
   }
 }
