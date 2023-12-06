@@ -11,7 +11,7 @@ const SensorList: React.FC = () => {
   const { openDialog } = useDialog()
 
   return (
-    <div className="space-y-4">
+    <>
       <div className="ml-auto max-w-fit">
         <Button 
           variant="primary" 
@@ -23,7 +23,7 @@ const SensorList: React.FC = () => {
       {sensors.map(sensor => (
         <SensorItem key={ sensor.id } sensor={ sensor }/>
       ))}
-    </div>
+    </>
   )
 }
 

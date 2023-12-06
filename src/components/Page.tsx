@@ -11,7 +11,7 @@ const Page: React.FC<Props> = ({ children, breadcrumb }) => (
         <Breadcrumb breadcrumb={ breadcrumb }/>
       </div>
     </nav>
-    <main className="w-full px-6 py-4 mx-auto">
+    <main className="w-full px-6 py-4 mx-auto space-y-4">
       { children }
     </main>
   </>

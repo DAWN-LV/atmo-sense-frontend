@@ -9,7 +9,7 @@ const Avatar: React.FC<React.HTMLProps<HTMLDivElement>> = ({ ...props }) => {
       return <img src={ user.avatar } alt="Avatar"/>
     }
 
-    return <Icon name="circle_user" className="w-9 h-9 text-3xl"/>
+    return <Icon name="circle_user" className="w-9 h-9 text-3xl dark:text-white"/>
   }
 
   return (

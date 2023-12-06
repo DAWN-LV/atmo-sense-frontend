@@ -19,6 +19,7 @@ const SensorDropdown: React.FC<{ sensor: SensorModel }> = ({ sensor }) => {
 
 const SensorItem: React.FC<{ sensor: SensorModel }> = ({ sensor }) => (
   <Accordion 
+    id={ `sensor-${sensor.id}` }
     title={ sensor.data.name } 
     prepend={ [ <Badge label="CO2"/>, <SensorDropdown sensor={ sensor }/> ] }
   >

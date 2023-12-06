@@ -20,6 +20,9 @@ import Trash from "@/components/icon/internal/svg/trash.svg?raw"
 import RightFromBracket from "@/components/icon/internal/svg/right-from-bracket.svg?raw"
 import PenToSquare from "@/components/icon/internal/svg/pen-to-square.svg?raw"
 import Bars from "@/components/icon/internal/svg/bars.svg?raw"
+import Play from "@/components/icon/internal/svg/play.svg?raw"
+import Database from "@/components/icon/internal/svg/database.svg?raw"
+import Signal from "@/components/icon/internal/svg/signal.svg?raw"
 
 const icons = {
   gauge: Gauge,
@@ -44,6 +47,9 @@ const icons = {
   right_from_bracket: RightFromBracket,
   pen_to_square: PenToSquare,
   bars: Bars,
+  play: Play,
+  database: Database,
+  signal: Signal,
 }
 
 export type IconName = keyof typeof icons
