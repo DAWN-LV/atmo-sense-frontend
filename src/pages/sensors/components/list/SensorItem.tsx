@@ -1,3 +1,4 @@
+import React from "react"
 import { Dropdown, Item } from "@/components/dropdown"
 import Icon from "@/components/icon"
 import Accordion from "@/components/Accordion"
@@ -5,8 +6,9 @@ import { useDialog } from "@/providers"
 import SensorDialog from "@/pages/sensors/components/dialog/remove/SensorDialog"
 import SensorModel from "@/store/sensor/SensorModel"
 import Badge from "@/components/Badge"
-import LineChart from "../chart/LineChart"
-import { useMemo } from "react"
+import LineChart from "@/pages/sensors/components/chart/LineChart"
+import Clipboard from "@/components/Clipboard"
+import Indicator from "@/components/Indicator"
 
 const SensorDropdown: React.FC<{ sensor: SensorModel }> = ({ sensor }) => {
   const { openDialog } = useDialog()
@@ -14,35 +16,42 @@ const SensorDropdown: React.FC<{ sensor: SensorModel }> = ({ sensor }) => {
   return (
     <Dropdown parent={ <Icon name="ellipsis_vertical" className="cursor-pointer"/> }>
       <Item label="Edit" icon="pen_to_square"/>
-      <Item label="Remove" icon="trash" className="text-red-500" onClick={ () => openDialog(SensorDialog, { sensor }) }/>
+      <Item 
+        label="Remove" 
+        icon="trash" 
+        className="text-red-500" 
+        onClick={ () => openDialog(SensorDialog, { sensor }) }
+      />
     </Dropdown>
   )
 }
 
-const SensorItem: React.FC<{ sensor: SensorModel }> = ({ sensor }) => {
-  const prepend = useMemo(() => {
-    return (
-      <>
-        <Badge key={`badge_${sensor.id}`} label="CO2"/>
-        <SensorDropdown key={`dropdown_${sensor.id}`} sensor={ sensor }/>
-      </>
-    )
-  }, [sensor])
+// TODO: опкашлял с gpt момент - говорит что лучше использовать <React.memo> для компонентов 
+// если это не так то стоит переделать
+const Prepend: React.FC<{ sensor: SensorModel }> = React.memo(({ sensor }) => (
+  <>
+    <Badge key={ `badge_${sensor.id}` } label="CO2"/>
+    <SensorDropdown key={ `dropdown_${sensor.id}` } sensor={ sensor }/>
+  </>
+))
 
-  return (
-    <Accordion 
-      title={ sensor.data.name } 
-      prepend={ prepend }
-    >
-      <div>IP: { sensor.data.ip }</div>
-  
-      <LineChart
-        threshold={70}
-        xMin={+(Date.now() / 1000).toFixed(0) - 100000 + 1 * 300}
-        xMax={+(Date.now() / 1000).toFixed(0) - 100000 + 101 * 300}
-      />
-    </Accordion>
-  )
-}
+const SensorItem: React.FC<{ sensor: SensorModel }> = ({ sensor }) => (
+  <Accordion 
+    title={ sensor.data.name } 
+    append={ <Indicator/> }
+    prepend={ <Prepend sensor={ sensor }/> }
+  >
+    <div className="flex flex-col items-start bg-gray-100 dark:bg-gray-800 -m-5 mb-5 p-5">
+      <Clipboard title="IP :" label={ sensor.data.ip }/>
+      <Clipboard title="MAC :" label={ sensor.data.mac }/>
+    </div>
+
+    <LineChart
+      threshold={ 70 }
+      xMin={ +(Date.now() / 1000).toFixed(0) - 100000 + 1 * 300 }
+      xMax={ +(Date.now() / 1000).toFixed(0) - 100000 + 101 * 300 }
+    />
+  </Accordion>
+)
 
 export default SensorItem

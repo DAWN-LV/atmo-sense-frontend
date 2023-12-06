@@ -5,10 +5,10 @@ import {
   DatasetChartOptions,
   ScaleChartOptions,
   LineControllerChartOptions,
-} from 'chart.js';
-import { _DeepPartialObject } from 'node_modules/chart.js/dist/types/utils';
-import { enGB } from 'date-fns/locale';
-import { useMemo } from 'react';
+} from "chart.js"
+import { enGB } from "date-fns/locale"
+import { _DeepPartialObject } from "node_modules/chart.js/dist/types/utils"
+import { useMemo } from "react"
 
 type LineChartOptions = _DeepPartialObject<
   CoreChartOptions<"line"> &
@@ -95,7 +95,7 @@ export const useLineChartOptions = (
             box1: {
               type: "box",
               drawTime: "beforeDatasetsDraw",
-              backgroundColor: "#fff",
+              backgroundColor: "transparent",
               yMax,
               yMin,
               xMin,

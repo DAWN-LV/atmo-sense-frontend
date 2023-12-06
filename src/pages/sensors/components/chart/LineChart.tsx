@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef } from "react"
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -11,12 +11,12 @@ import {
   Legend,
   ChartData,
   Point,
-} from 'chart.js';
-import 'chartjs-adapter-date-fns';
-import zoomPlugin from 'chartjs-plugin-zoom';
-import annotationPlugin from 'chartjs-plugin-annotation';
-import { Line } from 'react-chartjs-2';
-import { useLineChartOptions } from './useLineChartOptions';
+} from "chart.js"
+import "chartjs-adapter-date-fns"
+import zoomPlugin from "chartjs-plugin-zoom"
+import annotationPlugin from "chartjs-plugin-annotation"
+import { Line } from "react-chartjs-2"
+import { useLineChartOptions } from "@/pages/sensors/components/chart/useLineChartOptions"
 
 ChartJS.register(
   CategoryScale,
@@ -62,7 +62,7 @@ const LineChart: React.FC<Props> = ({ xMin, xMax }) => {
       // console.log('chartRef.current = ', chartRef.current)
 
       if (chartRef.current) { // !!!!!!!!!!!!!!!!
-        chartRef.current?.destroy();
+        chartRef.current?.destroy()
       }
     }
   }, [])
