@@ -22,7 +22,7 @@ export default class HttpClient {
     try {
       return await this.client.get<T, "json">(url, options)
     } catch (error) {
-      this.handleError(error)
+      HttpClient.handleError(error)
     }
   }
 
@@ -30,7 +30,7 @@ export default class HttpClient {
     try {
       return await this.client.post<T, "json">(url, data, options)
     } catch (error) {
-      this.handleError(error)
+      HttpClient.handleError(error)
     }
   }
 
@@ -38,7 +38,7 @@ export default class HttpClient {
     try {
       return await this.client.delete<T, "json">(url, options)
     } catch (error) {
-      this.handleError(error)
+      HttpClient.handleError(error)
     }
   }
 
@@ -46,7 +46,7 @@ export default class HttpClient {
     delete this.client.options.headers.Authorization
   }
 
-  private handleError(error: any) {
+  private static handleError(error: any): never {
     if (isMandeError(error)) {
       const bodyData = {
         message: error.body.message,
