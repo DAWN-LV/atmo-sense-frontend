@@ -1,7 +1,7 @@
 import { useEffect, useMemo } from "react"
 import NotificationModel from "@/store/notification/NotificationModel"
 import { observer } from "mobx-react-lite"
-import Notification from "@/components/notification/internal/Notification"
+import Notification from "@/components/Notification"
 import { useNotification } from "@/providers"
 
 const Dismissible: React.FC<{ notification: NotificationModel }> = ({ notification }) => {
@@ -22,7 +22,7 @@ const Notifications: React.FC = () => {
   return (
     <>
       { sliced.length ? (
-        <div className="fixed left-0 w-screen flex flex-col items-end p-5 z-50">
+        <div className="fixed right-0 w-fit flex flex-col items-end p-5 z-50">
           {sliced.map((notification) => (
             <Dismissible key={ notification.message } notification={ notification }/>
           ))}

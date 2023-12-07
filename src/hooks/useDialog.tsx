@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useRef } from "react"
 import { v4 as uuidv4 } from "uuid"
 import { runInAction } from "mobx" 
-import useConfirmDialog from "@/components/dialog/internal/useConfirmDialog"
+import { useConfirmDialog } from "@/components/dialog"
 import { useDialogCollection } from "@/providers"
 
 export interface DialogOptions {

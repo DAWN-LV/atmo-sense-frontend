@@ -2,7 +2,7 @@ import { useDialogCollection } from '@/providers'
 import { observer } from 'mobx-react-lite'
 import ReactDOM from 'react-dom'
 
-const DialogLayout = () => {
+const Dialogs = () => {
   const dialogCollection = useDialogCollection()
 
   if (!dialogCollection) {
@@ -19,4 +19,4 @@ const DialogLayout = () => {
   )
 }
 
-export default observer(DialogLayout)
+export default observer(Dialogs)

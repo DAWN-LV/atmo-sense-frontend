@@ -1,5 +1,5 @@
 import React from 'react'
-import Dialog from '@/components/dialog/internal/Dialog' 
+import Dialog from '@/components/dialog/components/Dialog' 
 import Button, { ButtonVariant } from '@/components/Button' 
 
 interface ConfirmationDialogProps {

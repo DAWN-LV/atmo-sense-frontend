@@ -1,5 +1,5 @@
-import { useConfirmationDialog } from "@/components/dialog"
 import Icon from "@/components/icon"
+import useConfirmationDialog from "@/hooks/useConfirmationDialog"
 import { useNotification } from "@/providers"
 import SensorModel from "@/store/sensor/SensorModel"
 

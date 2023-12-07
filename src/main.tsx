@@ -1,23 +1,23 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import Notifications from '@/components/notification'
-import Providers from '@/providers'
-import DialogLayout from '@/layouts/DialogLayout'
-import Head from '@/components/Head'
-import App from '@/App.tsx'
+import React from "react"
+import ReactDOM from "react-dom/client"
+import Head from "@/components/Head"
+import NotificationLayout from "@/layouts/NotificationLayout"
+import DialogLayout from "@/layouts/DialogLayout"
+import Providers from "@/providers"
+import App from "@/App.tsx"
 
-import '@/assets/styles/index.css'
+import "@/assets/styles/index.css"
 
-import config from '@/config'
+import config from "@/config"
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <Providers>
       <DialogLayout/>
+      <NotificationLayout/>
       <Head>
         <title>{ config.app.title }</title>
       </Head>
-      <Notifications/>
       <App/>
     </Providers>
   </React.StrictMode>

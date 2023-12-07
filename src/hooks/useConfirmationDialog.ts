@@ -1,5 +1,5 @@
-import useDialog, { DialogOptions } from "@/components/dialog/internal/useDialog"
-import ConfirmationDialog from "@/components/dialog/internal/ConfirmationDialog"
+import useDialog, { DialogOptions } from "@/hooks/useDialog"
+import { ConfirmationDialog } from "@/components/dialog"
 
 export interface ConfirmationDialogOptions extends Omit<DialogOptions, 'confirmEvent' | 'cancelEvent'> {
   title: string,

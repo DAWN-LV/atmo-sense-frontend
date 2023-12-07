@@ -1,6 +1,5 @@
-import React, { useState } from 'react'
-import Icon from '@/components/icon'
-import { classNames } from '@/utils'
+import React, { useState } from "react"
+import Icon from "@/components/icon"
 
 type Props = React.HTMLAttributes<HTMLDivElement> & {
   title: string,
@@ -11,7 +10,7 @@ type Props = React.HTMLAttributes<HTMLDivElement> & {
 
 const Accordion: React.FC<Props> = ({ title, children, prepend, initState = false, ...props }) => {
     const [ isOpen, setOpen ] = useState(initState)
-
+    
     return (
       <div { ...props }>
         <div className="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-900 bg-gray-100 border border-b-0 border-gray-200 rounded-t-xl focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3">
@@ -23,13 +22,15 @@ const Accordion: React.FC<Props> = ({ title, children, prepend, initState = fals
             { prepend }
           </div>
         </div>
-        <div className={ classNames("overflow-hidden transition-max-height", isOpen ? "max-h-96" : "max-h-0") }>
-          <div className="p-5 border border-b-0 border-gray-200 dark:border-gray-700 dark:bg-gray-900">
-            <div className="mb-2 text-gray-500 dark:text-gray-400">
-              { children }
+        { isOpen ? (
+          <div className="overflow-hidden transition-max-height">
+            <div className="p-5 border border-b-0 border-gray-200 dark:border-gray-700 dark:bg-gray-900">
+              <div className="mb-2 text-gray-500 dark:text-gray-400">
+                { children }
+              </div>
             </div>
           </div>
-        </div>
+        ) : null }
       </div>
     )
 }

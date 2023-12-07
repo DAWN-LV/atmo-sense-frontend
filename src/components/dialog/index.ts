@@ -1,7 +1,6 @@
-import Dialog from "@/components/dialog/internal/Dialog"
+// Components
+export { default as Dialog } from "@/components/dialog/components/Dialog"
+export { default as ConfirmationDialog } from "@/components/dialog/components/ConfirmationDialog"
 
-import useDialog from "@/components/dialog/internal/useDialog"
-import useConfirmationDialog from "@/components/dialog/internal/useConfirmationDialog"
-
-export default Dialog
-export { useDialog, useConfirmationDialog }
+// Hooks
+export { default as useConfirmDialog } from "@/components/dialog/hooks/useConfirmDialog"

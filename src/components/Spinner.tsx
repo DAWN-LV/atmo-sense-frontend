@@ -1,4 +1,4 @@
-import Icon from "@/components/icon/internal/Icon"
+import Icon from "@/components/icon/components/Icon"
 import { classNames } from "@/utils"
 
 const Spinner: React.FC<React.HTMLAttributes<HTMLSpanElement>> = ({ ...props }) => (

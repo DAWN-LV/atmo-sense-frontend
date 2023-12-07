@@ -1,7 +1,7 @@
-import { useDialog } from "@/components/dialog"
 import { useNotification } from "@/providers"
 import CreateSensorDialog from "@/pages/sensors/components/dialog/CreateSensorDialog"
 import Button from "@/components/Button"
+import useDialog from "@/hooks/useDialog"
 
 const CreateSensorButton: React.FC = () => {
   const notification = useNotification()

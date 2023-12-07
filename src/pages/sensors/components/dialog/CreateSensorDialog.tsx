@@ -1,6 +1,6 @@
 import { FormProvider, useForm } from "react-hook-form"
 import Button from "@/components/Button"
-import Dialog from "@/components/dialog"
+import { Dialog } from "@/components/dialog"
 
 import { TextField } from "@/components/form"
 import { ipValidation } from "@/components/form/validation/ip"
