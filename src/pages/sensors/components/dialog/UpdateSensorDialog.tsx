@@ -16,7 +16,11 @@ interface Props {
 const UpdateSensorDialog: React.FC<Props> = ({ sensor, onConfirm, onCancel }) => {
   const notification = useNotification()
   
-  const methods = useForm<UpdateSensorDTO>()
+  const methods = useForm<UpdateSensorDTO>({ 
+    defaultValues: { 
+      name: sensor.data.name 
+    } 
+  })
 
   const handleConfirm = async (dto: UpdateSensorDTO) => {
     await sensor.update(dto)
