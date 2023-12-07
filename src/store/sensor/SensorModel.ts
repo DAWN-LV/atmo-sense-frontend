@@ -21,4 +21,8 @@ export default class SensorModel {
     await SensorApi.delete(this.id)
     this.store.sensors.delete(this.id)
   }
+
+  actualize(dto: SensorDTO) {
+    Object.assign(this.data, dto)
+  }
 }

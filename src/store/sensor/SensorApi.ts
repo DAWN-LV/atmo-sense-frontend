@@ -6,6 +6,10 @@ export default abstract class SensorApi {
     return http.get<SensorDTO[]>("sensors")
   }
 
+  static async fetchOne(id: number) {
+    return http.get<SensorDTO>(`sensors/${id}`)
+  }
+
   static async create(dto: CreateSensorDTO) {
     return http.post<SensorDTO>("sensors", { ...dto })
   }

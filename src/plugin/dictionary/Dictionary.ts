@@ -9,7 +9,7 @@ export default class Dictionary<K extends string | number, V> {
   constructor(entries: InitialEntries<K, V> = []) {
     this.data = new Map(entries)
 
-    makeAutoObservable(this)
+    makeAutoObservable(this, undefined, { deep: true })
   }
 
   get size() {

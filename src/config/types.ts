@@ -1,6 +1,7 @@
 export interface Config { 
   app: AppConfig,
   api: ApiConfig,
+  socket: SocketConfig,
 }
 
 export interface AppConfig {
@@ -10,4 +11,8 @@ export interface AppConfig {
 export interface ApiConfig {
   baseUrl: string,
   timeout: number
+}
+
+export interface SocketConfig {
+  url: string
 }

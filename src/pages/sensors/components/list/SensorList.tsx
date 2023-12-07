@@ -1,4 +1,3 @@
-import React from 'react'
 import SensorItem from '@/pages/sensors/components/list/SensorItem'
 import { useAppStore } from '@/providers/internal/AppStoreProvider'
 import { observer } from 'mobx-react-lite'

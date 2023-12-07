@@ -1,4 +1,9 @@
-import { ApiConfig, AppConfig, Config } from "@/config/types"
+import { 
+  ApiConfig, 
+  AppConfig,
+  Config, 
+  SocketConfig 
+} from "@/config/types"
 
 const app: AppConfig = {
   title: "AtmoSense"
@@ -9,4 +14,8 @@ const api: ApiConfig = {
   timeout: 30_000
 }
 
-export default { app, api } as Readonly<Config>
+const socket: SocketConfig = {
+  url: "ws://" + location.hostname + ":3000"
+}
+
+export default { app, api, socket } as Readonly<Config>
