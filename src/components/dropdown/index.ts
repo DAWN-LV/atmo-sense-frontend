@@ -1,4 +1,2 @@
-import Dropdown from "@/components/dropdown/internal/Dropdown"
-import Item from "@/components/dropdown/internal/Item"
-
-export { Dropdown, Item }
+export { default as Dropdown } from "@/components/dropdown/components/Dropdown"
+export { default as Item } from "@/components/dropdown/components/Item"

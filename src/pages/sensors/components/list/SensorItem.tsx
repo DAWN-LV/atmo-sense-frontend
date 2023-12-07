@@ -2,8 +2,6 @@ import React from "react"
 import { Dropdown, Item } from "@/components/dropdown"
 import Icon from "@/components/icon"
 import Accordion from "@/components/Accordion"
-import { useDialog } from "@/providers"
-import SensorDialog from "@/pages/sensors/components/dialog/remove/SensorDialog"
 import SensorModel from "@/store/sensor/SensorModel"
 import Badge from "@/components/Badge"
 import LineChart from "@/pages/sensors/components/chart/LineChart"
@@ -11,23 +9,14 @@ import Clipboard from "@/components/Clipboard"
 import Indicator from "@/components/Indicator"
 
 const SensorDropdown: React.FC<{ sensor: SensorModel }> = ({ sensor }) => {
-  const { openDialog } = useDialog()
-
   return (
     <Dropdown parent={ <Icon name="ellipsis_vertical" className="cursor-pointer"/> }>
       <Item label="Edit" icon="pen_to_square"/>
-      <Item 
-        label="Remove" 
-        icon="trash" 
-        className="text-red-500" 
-        onClick={ () => openDialog(SensorDialog, { sensor }) }
-      />
+      <Item label="Remove" icon="trash" className="text-red-500"/>
     </Dropdown>
   )
 }
 
-// TODO: опкашлял с gpt момент - говорит что лучше использовать <React.memo> для компонентов 
-// если это не так то стоит переделать
 const Prepend: React.FC<{ sensor: SensorModel }> = React.memo(({ sensor }) => (
   <>
     <Badge key={ `badge_${sensor.id}` } label="CO2"/>
@@ -37,7 +26,6 @@ const Prepend: React.FC<{ sensor: SensorModel }> = React.memo(({ sensor }) => (
 
 const SensorItem: React.FC<{ sensor: SensorModel }> = ({ sensor }) => (
   <Accordion 
-    id={ `sensor-${sensor.id}` }
     title={ sensor.data.name } 
     append={ <Indicator/> }
     prepend={ <Prepend sensor={ sensor }/> }

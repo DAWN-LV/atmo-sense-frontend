@@ -1,4 +1,4 @@
-import { DialogProvider, useDialog, DialogProps } from "@/providers/internal/DialogProvider"
+import { DialogCollectionProvider, useDialogCollection } from "@/providers/internal/DialogCollectionProvider"
 import { AppStoreProvider, useAppStore } from "@/providers/internal/AppStoreProvider"
 import { NotificationProvider, useNotification } from "@/providers/internal/NotificationProvider"
 import { Provider, WithChildren } from "@/providers/types"
@@ -15,8 +15,8 @@ function composeProviders(...providers: Provider[]) {
 const Providers = composeProviders(
   NotificationProvider,
   AppStoreProvider,
-  DialogProvider
+  DialogCollectionProvider
 )
 
-export { useAppStore, useDialog, useNotification }
+export { useAppStore, useDialogCollection, useNotification }
 export default Providers

@@ -1,18 +1,18 @@
 import Button from "@/components/Button"
 import Page from "@/components/Page"
-import SensorDialog from '@/pages/sensors/components/dialog/create/SensorDialog'
+import CreateSensorDialog from '@/pages/sensors/components/dialog/CreateSensorDialog'
 import SensorList from "@/pages/sensors/components/list/SensorList"
-import { useDialog } from "@/providers"
+import useDialog from "@/hooks/useDialog"
 
 const NewSensorButton: React.FC = () => {
-  const { openDialog } = useDialog()
-  
+  const dialog = useDialog(CreateSensorDialog, {}, { persistent: true })
+
   return (
     <Button 
       variant="primary" 
       icon="plus" 
       label="New Sensor" 
-      onClick={ () => openDialog(SensorDialog) }
+      onClick={ dialog.reveal }
     />
   )
 }

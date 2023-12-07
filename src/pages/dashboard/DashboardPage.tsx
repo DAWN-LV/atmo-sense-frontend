@@ -3,6 +3,7 @@ import Page from "@/components/Page"
 import DashboardTile from "@/pages/dashboard/components/DashboardTile"
 import SensorCard from "@/pages/sensors/components/SensorCard"
 import { useAppStore } from "@/providers"
+import { observer } from "mobx-react-lite"
 
 const DashboardPage: React.FC = () => {
   const { sensorStore } = useAppStore()
@@ -22,4 +23,4 @@ const DashboardPage: React.FC = () => {
   )
 }
 
-export default DashboardPage
+export default observer(DashboardPage)

@@ -10,7 +10,7 @@ interface Props {
 }
 
 const Accordion: React.FC<Props> = ({ title, children, append, prepend, initState = false }) => {
-    const [ isOpen, setOpen ] = useState(false)
+    const [ isOpen, setOpen ] = useState(initState)
 
     return (
       <div>
