@@ -21,7 +21,7 @@ const variantClass: Record<Exclude<Props["variant"], undefined>, string> = {
 const Button: React.FC<Props> = ({ type = "button", variant = "default", label, icon, loading, onClick, ...props }) => (
   <button 
     type={ type } 
-    className={ classNames("flex items-center w-full gap-x-2 justify-center px-4 py-2 rounded-md shadow-sm transition ease-in-out duration-150", variantClass[variant], props.className) }
+    className={ classNames("flex items-center w-full gap-x-2 justify-center p-2 rounded-md shadow-sm transition ease-in-out duration-150", variantClass[variant], props.className) }
     onClick={ onClick }  
   >
     { loading ? <Spinner/> : null }
@@ -29,7 +29,7 @@ const Button: React.FC<Props> = ({ type = "button", variant = "default", label, 
     { icon ? <Icon name={ icon }/> : null }
 
     { label ? (
-      <span className="font-semibold flex-grow truncate">{ label }</span>
+      <span className="font-semibold flex-grow truncate mx-2">{ label }</span>
     ) : null }
   </button>
 )

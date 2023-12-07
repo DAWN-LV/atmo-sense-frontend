@@ -23,6 +23,7 @@ import Bars from "@/components/icon/internal/svg/bars.svg?raw"
 import Play from "@/components/icon/internal/svg/play.svg?raw"
 import Database from "@/components/icon/internal/svg/database.svg?raw"
 import Signal from "@/components/icon/internal/svg/signal.svg?raw"
+import Clipboard from "@/components/icon/internal/svg/clipboard.svg?raw"
 
 const icons = {
   gauge: Gauge,
@@ -50,6 +51,7 @@ const icons = {
   play: Play,
   database: Database,
   signal: Signal,
+  clipboard: Clipboard,
 }
 
 export type IconName = keyof typeof icons

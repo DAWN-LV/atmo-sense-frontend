@@ -12,6 +12,10 @@
   },
   "dependencies": {
     "chart.js": "^4.4.0",
+    "chartjs-adapter-date-fns": "^3.0.0",
+    "chartjs-plugin-annotation": "^3.0.1",
+    "chartjs-plugin-zoom": "^2.0.1",
+    "date-fns": "^2.30.0",
     "mande": "^2.0.8",
     "mobx": "^6.11.0",
     "mobx-react-lite": "^4.0.5",
@@ -23,6 +27,7 @@
     "url": "^0.11.3"
   },
   "devDependencies": {
+    "@types/chartjs-plugin-annotation": "^0.5.5",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
