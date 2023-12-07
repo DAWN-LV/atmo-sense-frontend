@@ -15,9 +15,11 @@ const DashboardPage: React.FC = () => {
       </div>
 
       <Accordion title="Recently added sensors" initState={ Boolean(sensorStore.count) }>
-        {sensorStore.sensors.map(sensor => (
-          <SensorCard key={ sensor.id } sensor={ sensor }/>
-        ))}
+        <div className="flex flex-wrap gap-4 justify-center md:justify-normal">
+          {sensorStore.sensors.map(sensor => (
+            <SensorCard key={ sensor.id } sensor={ sensor }/>
+          ))}
+        </div>
       </Accordion>
     </Page>
   )
