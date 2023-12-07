@@ -1,5 +1,5 @@
 import { http } from "@/globals"
-import { CreateSensorDTO, SensorDTO } from "@/store/sensor/types"
+import { CreateSensorDTO, SensorDTO, UpdateSensorDTO } from "@/store/sensor/types"
 
 export default abstract class SensorApi {
   static async fetchAll() {
@@ -11,10 +11,14 @@ export default abstract class SensorApi {
   }
 
   static async create(dto: CreateSensorDTO) {
-    return http.post<SensorDTO>("sensors", { ...dto })
+    return http.post<SensorDTO>("sensors", dto)
+  }
+
+  static async update(id: number, dto: UpdateSensorDTO) {
+    return http.patch<SensorDTO>(`sensors/${id}`, dto)
   }
 
   static async delete(id: number) {
-    return http.delete(`sensors/${ id }`)
+    return http.delete(`sensors/${id}`)
   }
 }

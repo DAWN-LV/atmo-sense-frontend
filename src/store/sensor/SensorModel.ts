@@ -1,4 +1,4 @@
-import { SensorDTO } from "@/store/sensor/types"
+import { SensorDTO, UpdateSensorDTO } from "@/store/sensor/types"
 import { makeAutoObservable } from "mobx"
 import SensorApi from "@/store/sensor/SensorApi"
 import SensorStore from "@/store/sensor/SensorStore"
@@ -20,6 +20,10 @@ export default class SensorModel {
   async delete() {
     await SensorApi.delete(this.id)
     this.store.sensors.delete(this.id)
+  }
+
+  async update(dto: UpdateSensorDTO) {
+    await SensorApi.update(this.id, dto)
   }
 
   actualize(dto: SensorDTO) {

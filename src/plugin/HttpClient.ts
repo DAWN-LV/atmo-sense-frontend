@@ -34,6 +34,14 @@ export default class HttpClient {
     }
   }
 
+  async patch<T>(url: string | number, data?: any, options?: Options<"json">) {
+    try {
+      return await this.client.patch<T, "json">(url, data, options)
+    } catch (error) {
+      HttpClient.handleError(error)
+    }
+  }
+
   async delete<T>(url: string | number, options?: Options<"json">) {
     try {
       return await this.client.delete<T, "json">(url, options)

@@ -9,3 +9,7 @@ export interface CreateSensorDTO {
   id: number
   name: string
 }
+
+export interface UpdateSensorDTO {
+  name: string
+}

@@ -8,11 +8,15 @@ import LineChart from "@/pages/sensors/components/chart/LineChart"
 import Clipboard from "@/components/Clipboard"
 import Indicator from "@/components/Indicator"
 import { observer } from "mobx-react-lite"
+import useDialog from "@/hooks/useDialog"
+import UpdateSensorDialog from "@/pages/sensors/components/dialog/UpdateSensorDialog"
 
 const SensorDropdown: React.FC<{ sensor: SensorModel }> = ({ sensor }) => {
+  const dialog = useDialog(UpdateSensorDialog, { sensor }, { persistent: true })
+
   return (
     <Dropdown parent={ <Icon name="ellipsis_vertical" className="cursor-pointer"/> }>
-      <Item label="Edit" icon="pen_to_square"/>
+      <Item label="Edit" icon="pen_to_square" onClick={ dialog.reveal }/>
       <Item label="Remove" icon="trash" className="text-red-500"/>
     </Dropdown>
   )

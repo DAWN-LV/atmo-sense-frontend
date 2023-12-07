@@ -3,27 +3,27 @@ import Button from "@/components/Button"
 import { Dialog } from "@/components/dialog"
 
 import { TextField } from "@/components/form"
-import { ipValidation } from "@/components/form/validation/ip"
-import { CreateSensorDTO } from "@/store/sensor/types"
-import { useAppStore, useNotification } from "@/providers"
+import { UpdateSensorDTO } from "@/store/sensor/types"
+import { useNotification } from "@/providers"
+import SensorModel from "@/store/sensor/SensorModel"
 
 interface Props {
+  sensor: SensorModel,
   onConfirm?: () => void,
   onCancel?: () => void
 }
 
-const CreateSensorDialog: React.FC<Props> = ({ onConfirm, onCancel }) => {
-  const { sensorStore } = useAppStore()
+const UpdateSensorDialog: React.FC<Props> = ({ sensor, onConfirm, onCancel }) => {
   const notification = useNotification()
   
-  const methods = useForm<CreateSensorDTO>()
+  const methods = useForm<UpdateSensorDTO>()
 
-  const handleConfirm = async (dto: CreateSensorDTO) => {
-    await sensorStore.create(dto)
+  const handleConfirm = async (dto: UpdateSensorDTO) => {
+    await sensor.update(dto)
     notification.add({
       type: "success",
-      title: "Sensor Added Successfully",
-      message: "The new sensor has been successfully added to your system."
+      title: "Sensor Updated Successfully",
+      message: "The sensor has been successfully updated to your system."
     })
 
     onConfirm && onConfirm()
@@ -33,13 +33,13 @@ const CreateSensorDialog: React.FC<Props> = ({ onConfirm, onCancel }) => {
     <FormProvider { ...methods }>
       <form onSubmit={ methods.handleSubmit(handleConfirm) }>
         <Dialog
-          header={ <div>Add new sensor</div> }
+          header={ <div>Update sensor</div> }
           footer={
             <div className="flex space-x-4">
               <Button 
                 type="submit"
                 variant="primary" 
-                label="Add"
+                label="Update"
                 loading={ methods.formState.isSubmitting }
               />
               <Button variant="negative" label="Cancel" onClick={ onCancel }/>
@@ -53,12 +53,6 @@ const CreateSensorDialog: React.FC<Props> = ({ onConfirm, onCancel }) => {
               label="Name"
               validates={ { required: "Name is required" } }
             />
-            <TextField 
-              name="ip" 
-              placeholder="192.168.0.1" 
-              label="IP"
-              validates={ ipValidation }
-            />
           </div>
         </Dialog>
       </form>
@@ -66,4 +60,4 @@ const CreateSensorDialog: React.FC<Props> = ({ onConfirm, onCancel }) => {
   )
 }
 
-export default CreateSensorDialog
+export default UpdateSensorDialog
