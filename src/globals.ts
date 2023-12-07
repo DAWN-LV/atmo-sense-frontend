@@ -1,6 +1,6 @@
-import { mande } from "mande"
+import HttpClient from "@/plugin/HttpClient"
 import config from "@/config"
 
-const http = mande(config.api.baseUrl)
+const http = new HttpClient(config.api.baseUrl)
 
 export { http }

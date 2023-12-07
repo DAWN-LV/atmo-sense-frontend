@@ -39,10 +39,8 @@ export default class AppStore {
     reaction(
       () => this.sessionStore.isValid, 
       (isValid) => {
-        delete http.options.headers.Authorization
-
         if (isValid) {
-          http.options.headers.Authorization = "Bearer " + this.sessionStore.session.token
+          http.setAuthorization("Bearer " + this.sessionStore.session.token)
 
           void this.load()
         }

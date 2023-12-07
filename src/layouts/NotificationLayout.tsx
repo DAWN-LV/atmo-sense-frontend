@@ -22,7 +22,7 @@ const Notifications: React.FC = () => {
   return (
     <>
       { sliced.length ? (
-        <div className="fixed right-0 w-fit flex flex-col items-end p-5 z-50">
+        <div className="fixed right-0 w-fit flex flex-col items-end p-5 z-notification">
           {sliced.map((notification) => (
             <Dismissible key={ notification.message } notification={ notification }/>
           ))}

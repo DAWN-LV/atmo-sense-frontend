@@ -8,6 +8,9 @@ export default {
   ],
   theme: {
     extend: {
+      zIndex: {
+        "notification": 10_000,
+      },
       keyframes: {
         "shake-horizontal": {
           "0%": { transform: "translateX(0)" },

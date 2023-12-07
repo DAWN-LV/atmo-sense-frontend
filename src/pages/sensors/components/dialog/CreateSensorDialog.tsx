@@ -1,3 +1,4 @@
+import { useEffect } from "react"
 import { FormProvider, useForm } from "react-hook-form"
 import Button from "@/components/Button"
 import { Dialog } from "@/components/dialog"
@@ -15,22 +16,18 @@ interface Props {
 const CreateSensorDialog: React.FC<Props> = ({ onConfirm, onCancel }) => {
   const { sensorStore } = useAppStore()
   const notification = useNotification()
-
+  
   const methods = useForm<CreateSensorDTO>()
 
   const handleConfirm = async (dto: CreateSensorDTO) => {
-    try {
-      await sensorStore.create(dto)
-      notification.add({
-        type: "success",
-        title: "Sensor Added Successfully",
-        message: "The new sensor has been successfully added to your system."
-      })
+    await sensorStore.create(dto)
+    notification.add({
+      type: "success",
+      title: "Sensor Added Successfully",
+      message: "The new sensor has been successfully added to your system."
+    })
 
-      onConfirm && onConfirm()
-    } catch (error) {
-      throw error
-    }
+    onConfirm && onConfirm()
   }
 
   return (
@@ -40,7 +37,12 @@ const CreateSensorDialog: React.FC<Props> = ({ onConfirm, onCancel }) => {
           header={ <div>Add new sensor</div> }
           footer={
             <div className="flex space-x-4">
-              <Button type="submit" variant="primary" label="Add"/>
+              <Button 
+                type="submit"
+                variant="primary" 
+                label="Add"
+                loading={ methods.formState.isSubmitting }
+              />
               <Button variant="negative" label="Cancel" onClick={ onCancel }/>
             </div>
           }

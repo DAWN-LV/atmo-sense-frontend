@@ -4,13 +4,12 @@ import { classNames } from "@/utils"
 
 export type ButtonVariant = "primary" | "negative" | "light" | "default"
 
-type Props = React.HTMLAttributes<HTMLSpanElement> & {
+type Props = React.HTMLAttributes<HTMLButtonElement> & {
   type?: "button" | "submit",
   variant?: ButtonVariant,
   label?: string,
   icon?: IconName,
   loading?: boolean,
-  onClick?: () => void
 }
 
 const variantClass: Record<ButtonVariant, string> = {
@@ -20,11 +19,11 @@ const variantClass: Record<ButtonVariant, string> = {
   "default": "hover:opacity-60"
 }
 
-const Button: React.FC<Props> = ({ type = "button", variant = "default", label, icon, loading, onClick, ...props }) => (
+const Button: React.FC<Props> = ({ type = "button", variant = "default", label, icon, loading, ...props }) => (
   <button 
+    { ...props }
     type={ type } 
     className={ classNames("flex items-center w-full gap-x-2 justify-center p-2 rounded-md shadow-sm transition ease-in-out duration-150", variantClass[variant], props.className) }
-    onClick={ onClick }  
   >
     { loading ? <Spinner/> : null }
 

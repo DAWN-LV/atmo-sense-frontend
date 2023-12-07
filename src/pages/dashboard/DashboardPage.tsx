@@ -14,7 +14,7 @@ const DashboardPage: React.FC = () => {
         <DashboardTile icon="microchip" label="Total Sensors" count={ sensorStore.count }/>
       </div>
 
-      <Accordion title="Recently added sensors" initState={ true }>
+      <Accordion title="Recently added sensors" initState={ Boolean(sensorStore.count) }>
         {sensorStore.sensors.map(sensor => (
           <SensorCard key={ sensor.id } sensor={ sensor }/>
         ))}
