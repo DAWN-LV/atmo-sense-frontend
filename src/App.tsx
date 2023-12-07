@@ -6,17 +6,6 @@ import { useAppStore, useNotification } from "@/providers"
 import setupErrorHandler from '@/error/ErrorHandler'
 import createHttpErrorHandler from "./error/handlers/createHttpErrorHandler"
 
-class GlobalError extends Error {
-  body: any
-
-  constructor(body?: any) {
-    super(body.message)
-
-    this.name = body.error
-    this.message = body.message
-  }
-}
-
 const App: React.FC = () => {
   const { sessionStore, load } = useAppStore()
   const notification = useNotification()
