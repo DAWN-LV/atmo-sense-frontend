@@ -41,8 +41,8 @@ const data: ChartData<"line", (number | Point | null)[], unknown> = {
         y: Math.random() * 100,
         x: +(Date.now() / 1000).toFixed(0) - 100000 + ((i + 1) * 300)
       })),
-      borderColor: 'rgb(255, 99, 132)',
-      backgroundColor: 'rgba(255, 99, 132, 0.5)',
+      borderColor: 'rgb(37, 99, 235)',
+      backgroundColor: 'rgba(37, 99, 235, 0.5)',
     }
   ]
 }

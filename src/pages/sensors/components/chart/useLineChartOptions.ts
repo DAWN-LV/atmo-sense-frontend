@@ -33,6 +33,15 @@ export const useLineChartOptions = (
 
     return {
       responsive: true,
+      elements: {
+        line: {
+          tension: 0.4
+        },
+        point: {
+          radius: 5,
+          hoverBackgroundColor: "white"
+        }
+      },
       scales: {
         x: {
           min: xMin,
@@ -109,7 +118,7 @@ export const useLineChartOptions = (
               xMin,
               xMax,
               borderColor: 'orange',
-              borderWidth: 2,
+              borderWidth: 5,
             },
           }
         }
