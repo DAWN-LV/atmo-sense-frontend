@@ -77,9 +77,10 @@ export const useLineChartOptions = (
       plugins: {
         legend: {
           position: 'top',
+          display: false
         },
         title: {
-          display: true,
+          display: false,
           text: 'Title text',
         },
         zoom: {
