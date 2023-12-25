@@ -8,7 +8,7 @@ interface Props {
 }
 
 const Dialog: React.FC<Props> = ({ header, children, footer }) => (
-  <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
+  <div className="relative mx-6 bg-white rounded-lg shadow dark:bg-gray-700">
     { header ? (
       <>
         <div className="flex items-center justify-between p-4 md:p-5 rounded-t dark:border-gray-600">

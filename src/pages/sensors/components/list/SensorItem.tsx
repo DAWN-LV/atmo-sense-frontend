@@ -10,13 +10,14 @@ import Indicator from "@/components/Indicator"
 import { observer } from "mobx-react-lite"
 import useDialog from "@/hooks/useDialog"
 import UpdateSensorDialog from "@/pages/sensors/components/dialog/UpdateSensorDialog"
+import SensorDataProvider from "../SensorDataProvider"
 
 const SensorDropdown: React.FC<{ sensor: SensorModel }> = ({ sensor }) => {
-  const dialog = useDialog(UpdateSensorDialog, { sensor }, { persistent: true })
+  const editDialog = useDialog(UpdateSensorDialog, { sensor }, { persistent: true })
 
   return (
     <Dropdown parent={ <Icon name="ellipsis_vertical" className="cursor-pointer"/> }>
-      <Item label="Edit" icon="pen_to_square" onClick={ dialog.reveal }/>
+      <Item label="Edit" icon="pen_to_square" onClick={ editDialog.reveal }/>
       <Item label="Remove" icon="trash" className="text-red-500"/>
     </Dropdown>
   )
@@ -41,11 +42,16 @@ const SensorItem: React.FC<{ sensor: SensorModel }> = ({ sensor }) => {
         <Clipboard title="MAC :" label={ sensor.data.mac }/>
       </div>
 
-      <LineChart
-        threshold={ 70 }
-        xMin={ +(Date.now() / 1000).toFixed(0) - 100000 + 1 * 300 }
-        xMax={ +(Date.now() / 1000).toFixed(0) - 100000 + 101 * 300 }
-      />
+      <SensorDataProvider id={ sensor.id } to={ 10 } from={ 1_000_000 }>
+        { (data) => (
+          <div>{ JSON.stringify(data) }</div>
+          // <LineChart
+          //   threshold={ 70 }
+          //   xMin={ data["values"][0][2] }
+          //   xMax={ data["values"][0][3] }
+          // />
+        ) }
+      </SensorDataProvider>
     </Accordion>
   )
 }
