@@ -1,16 +1,17 @@
-import { memo } from "react"
+import { memo, useEffect, useState } from "react"
 import { Dropdown, Item } from "@/components/dropdown"
 import Icon from "@/components/icon"
 import Accordion from "@/components/Accordion"
 import SensorModel from "@/store/sensor/SensorModel"
 import Badge from "@/components/Badge"
-import LineChart from "@/pages/sensors/components/chart/LineChart"
+import LineChart from "@/components/LineChart"
 import Clipboard from "@/components/Clipboard"
 import Indicator from "@/components/Indicator"
 import { observer } from "mobx-react-lite"
 import useDialog from "@/hooks/useDialog"
 import UpdateSensorDialog from "@/pages/sensors/components/dialog/UpdateSensorDialog"
-import SensorDataProvider from "../SensorDataProvider"
+import SensorApi from "@/store/sensor/SensorApi"
+import { getLineAnnotation } from "@/components/LineChart/utils"
 
 const SensorDropdown: React.FC<{ sensor: SensorModel }> = ({ sensor }) => {
   const editDialog = useDialog(UpdateSensorDialog, { sensor }, { persistent: true })
@@ -31,6 +32,40 @@ const Prepend: React.FC<{ sensor: SensorModel }> = memo(({ sensor }) => (
 ))
 
 const SensorItem: React.FC<{ sensor: SensorModel }> = ({ sensor }) => {
+  const [ data, setData ] = useState<any>({ datasets: [] })
+
+  useEffect(() => {
+    SensorApi.fetchData(sensor.id, { 
+      from: 10000, 
+      to: 10
+    })
+    .then(data => {
+      const parsedData = data.values.map((el: any) => {
+        return {
+          x: el[0],
+          y: el[1],
+          beforeLabel: `max: ${el[3]}`,
+          label: `avg: ${el[1]}`,
+          afterLabel: `min: ${el[2]}`
+        }
+      })
+
+      setData({
+        datasets: [
+          {
+            data: parsedData,
+            borderColor: 'rgb(37, 99, 235)',
+            backgroundColor: 'rgba(37, 99, 235, 0.5)',
+          }
+        ]
+      })
+    })
+  }, [sensor])
+
+  const xMin = +((Date.now()).toFixed(0)) - 10000000
+  const xMax = +((Date.now()).toFixed(0)) - 1000
+  const threshold = 720
+
   return (
     <Accordion 
       title={ sensor.data.name } 
@@ -42,16 +77,16 @@ const SensorItem: React.FC<{ sensor: SensorModel }> = ({ sensor }) => {
         <Clipboard title="MAC :" label={ sensor.data.mac }/>
       </div>
 
-      <SensorDataProvider id={ sensor.id } to={ 10 } from={ 1_000_000 }>
-        { (data) => (
-          <div>{ JSON.stringify(data) }</div>
-          // <LineChart
-          //   threshold={ 70 }
-          //   xMin={ data["values"][0][2] }
-          //   xMax={ data["values"][0][3] }
-          // />
-        ) }
-      </SensorDataProvider>
+      {/* <div>{ JSON.stringify(data) }</div> */}
+
+      <LineChart
+        xMin={xMin}
+        xMax={xMax}
+        yMin={0}
+        yMax={1000}
+        data={data}
+        annotations={getLineAnnotation(xMin, xMax, threshold, 'orange')}
+      />
     </Accordion>
   )
 }

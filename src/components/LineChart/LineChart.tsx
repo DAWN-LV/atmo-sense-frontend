@@ -16,7 +16,7 @@ import "chartjs-adapter-date-fns"
 import zoomPlugin from "chartjs-plugin-zoom"
 import annotationPlugin from "chartjs-plugin-annotation"
 import { Line } from "react-chartjs-2"
-import { useLineChartOptions } from "@/pages/sensors/components/chart/useLineChartOptions"
+import { LineChartAnnotationsType, useLineChartOptions } from "@/components/LineChart/useLineChartOptions"
 
 ChartJS.register(
   CategoryScale,
@@ -31,31 +31,33 @@ ChartJS.register(
   annotationPlugin
 );
 
-const arr = Array(100).fill(null)
-
-const data: ChartData<"line", (number | Point | null)[], unknown> = {
-  datasets: [
-    {
-      label: 'Sensor Data',
-      data: arr.map((_, i) => ({
-        y: Math.random() * 100,
-        x: +(Date.now() / 1000).toFixed(0) - 100000 + ((i + 1) * 300)
-      })),
-      borderColor: 'rgb(37, 99, 235)',
-      backgroundColor: 'rgba(37, 99, 235, 0.5)',
-    }
-  ]
+interface ILineChartDataPoint extends Point {
+  beforeLabel: string,
+  label: string,
+  afterLabel: string
 }
 
 interface Props {
-  threshold: number,
   xMin: number,
-  xMax: number
+  xMax: number,
+  yMin: number,
+  yMax: number,
+  data: ChartData<"line", ILineChartDataPoint[], unknown>,
+  tooltip?: any, //LineChartTooltipType,
+  annotations?: LineChartAnnotationsType,
 }
 
-const LineChart: React.FC<Props> = ({ xMin, xMax }) => {
+const LineChart: React.FC<Props> = ({
+  xMin,
+  xMax,
+  yMin,
+  yMax,
+  data,
+  tooltip,
+  annotations
+}) => {
   const chartRef = useRef<any>()
-  const options = useLineChartOptions(xMin, xMax, 0, 100)
+  const options = useLineChartOptions(xMin, xMax, yMin, yMax, tooltip, annotations)
 
   useEffect(() => {
     return () => {
@@ -63,6 +65,7 @@ const LineChart: React.FC<Props> = ({ xMin, xMax }) => {
 
       if (chartRef.current) { // !!!!!!!!!!!!!!!!
         chartRef.current?.destroy()
+        // ChartJS.getChart()
       }
     }
   }, [])
@@ -73,6 +76,7 @@ const LineChart: React.FC<Props> = ({ xMin, xMax }) => {
       options={options} 
       data={data} 
       className='max-h-96 max-w-80'
+      redraw={true}
     />
   )
 }

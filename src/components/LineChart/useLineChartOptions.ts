@@ -5,10 +5,13 @@ import {
   DatasetChartOptions,
   ScaleChartOptions,
   LineControllerChartOptions,
+  TooltipOptions,
 } from "chart.js"
-import { enGB } from "date-fns/locale"
+import { AnnotationOptions } from "chartjs-plugin-annotation"
+import { lv } from "date-fns/locale"
 import { _DeepPartialObject } from "node_modules/chart.js/dist/types/utils"
 import { useMemo } from "react"
+import { getTooltipDefaultOptions } from "./utils"
 
 type LineChartOptions = _DeepPartialObject<
   CoreChartOptions<"line"> &
@@ -19,27 +22,30 @@ type LineChartOptions = _DeepPartialObject<
   LineControllerChartOptions
 >
 
+export type LineChartAnnotationsType = Record<string, AnnotationOptions<"box"> | AnnotationOptions<"line">>
+export type LineChartTooltipType = TooltipOptions<"line">
+
 export const useLineChartOptions = (
   xMin: number,
   xMax: number,
   yMin: number,
-  yMax: number
+  yMax: number,
+  tooltip: LineChartTooltipType,
+  annotations?: LineChartAnnotationsType
 ): LineChartOptions => {
   return useMemo(() => {
-    const x_offset = (xMax - xMin) * 0.1 // 10% from total range
-
-    xMin = xMin - x_offset
-    xMax = xMax + x_offset
-
     return {
       responsive: true,
       elements: {
         line: {
-          tension: 0.4
+          tension: 0.4,
+          borderWidth: 1
         },
         point: {
-          radius: 5,
-          hoverBackgroundColor: "white"
+          radius: 3,
+          hoverBackgroundColor: "white",
+          hoverRadius: 6,
+          hitRadius: 100
         }
       },
       scales: {
@@ -53,21 +59,24 @@ export const useLineChartOptions = (
             text: "Time"
           },
           time: {
-            minUnit: "second",
+            minUnit: "second"
           },
           ticks: {
             maxRotation: 30,
             minRotation: 10,
             autoSkipPadding: 7,
-            autoSkip: true
+            autoSkip: true,
           },
           adapters: {
             date: {
-              locale: enGB
+              locale: lv
             }
           }
         },
         y: {
+          min: yMin,
+          max: yMax,
+          grace: '20%',
           title: {
             display: true,
             text: "Value"
@@ -75,13 +84,13 @@ export const useLineChartOptions = (
         }
       },
       plugins: {
+        tooltip: tooltip ? tooltip : getTooltipDefaultOptions(),
         legend: {
           position: 'top',
           display: false
         },
         title: {
           display: false,
-          text: 'Title text',
         },
         zoom: {
           limits: {
@@ -100,29 +109,7 @@ export const useLineChartOptions = (
             mode: "x",
           }
         },
-        annotation: {
-          annotations: {
-            box1: {
-              type: "box",
-              drawTime: "beforeDatasetsDraw",
-              backgroundColor: "transparent",
-              yMax,
-              yMin,
-              xMin,
-              xMax,
-            },
-            threshold: {
-              type: "line",
-              drawTime: "beforeDatasetsDraw",
-              yMin: 70,
-              yMax: 70,
-              xMin,
-              xMax,
-              borderColor: 'orange',
-              borderWidth: 5,
-            },
-          }
-        }
+        annotation: { annotations }
       },
     };
   }, [])
