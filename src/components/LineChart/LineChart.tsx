@@ -45,6 +45,7 @@ interface Props {
   data: ChartData<"line", ILineChartDataPoint[], unknown>,
   tooltip?: any, //LineChartTooltipType,
   annotations?: LineChartAnnotationsType,
+  height: number
 }
 
 const LineChart: React.FC<Props> = ({
@@ -54,7 +55,8 @@ const LineChart: React.FC<Props> = ({
   yMax,
   data,
   tooltip,
-  annotations
+  annotations,
+  height
 }) => {
   const chartRef = useRef<any>()
   const options = useLineChartOptions(xMin, xMax, yMin, yMax, tooltip, annotations)
@@ -73,6 +75,7 @@ const LineChart: React.FC<Props> = ({
   return (
     <Line
       // ref={chartRef} 
+      height={height}
       options={options} 
       data={data} 
       className='max-h-96 max-w-80'

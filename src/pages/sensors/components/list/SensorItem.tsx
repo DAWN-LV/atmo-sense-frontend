@@ -86,6 +86,7 @@ const SensorItem: React.FC<{ sensor: SensorModel }> = ({ sensor }) => {
         yMax={1000}
         data={data}
         annotations={getLineAnnotation(xMin, xMax, threshold, 'orange')}
+        height={400}
       />
     </Accordion>
   )

@@ -112,5 +112,5 @@ export const useLineChartOptions = (
         annotation: { annotations }
       },
     };
-  }, [])
+  }, [xMin, xMax, yMin, yMax, tooltip, annotations])
 }

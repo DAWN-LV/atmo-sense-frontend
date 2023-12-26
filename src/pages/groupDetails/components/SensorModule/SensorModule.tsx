@@ -30,7 +30,7 @@ const SensorModule: React.FC<Props> = ({ sensor }) => {
 	const limits = useChartLimits(ranges[activeRange].value * 1000)
 	const annotations = useMemo(() => {
 		return getLineAnnotation(limits.xMin, limits.xMax, threshold, 'orange')
-	}, [limits.xMin, limits.xMax])
+	}, [limits])
 
 	return (
 		<>
@@ -47,6 +47,7 @@ const SensorModule: React.FC<Props> = ({ sensor }) => {
 				yMax={1000}
 				data={chartData}
 				annotations={annotations}
+				height={400}
 			/>
 		</>
 	)
