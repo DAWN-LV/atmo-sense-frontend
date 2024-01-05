@@ -1,21 +1,18 @@
 import { useState } from "react"
-import { useFormContext } from 'react-hook-form'
 import Label from "@/components/form/components/Label"
 import Icon from "@/components/icon"
 import { CommonProps } from "@/components/form/types"
 
-const PasswordField: React.FC<CommonProps> = ({ name, label, placeholder, validates }) => {
+const PasswordField: React.FC<CommonProps> = ({ name, label, placeholder }) => {
   const [ flag, setFlag ] = useState(false)
-  const { register } = useFormContext()
 
   return (
     <div className="mb-4">
-      <Label label={ label }/>
+      <Label children={ label }/>
       <div className="mt-1 relative rounded-md shadow-sm">
         <input
-          { ...register(name, validates) }
           type={ flag ? 'text' : 'password' }
-          id={ name }
+          name={ name }
           placeholder={ placeholder }
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         />

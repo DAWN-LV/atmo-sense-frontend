@@ -14,5 +14,5 @@ export interface ApiConfig {
 }
 
 export interface SocketConfig {
-  url: string
+  baseUrl: string
 }

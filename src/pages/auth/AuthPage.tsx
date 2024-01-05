@@ -15,15 +15,6 @@ const AuthPage: React.FC = () => (
         <div className="text-center my-5">
           <h1 className="text-24 font-medium">Sign in to { config.app.title }</h1>
         </div>
-        <div className="lg:flex lg:items-center mb-2">
-          <Button type="button" variant="light" icon="google" label="Sign in with Google"/>
-        </div>
-        <div className="relative flex items-center justify-center h-5 mb-2">
-          <div className="absolute top-[50%] w-full border-t border-light-95"/>
-          <div className="relative z-10 text-13 text-grey bg-white dark:bg-gray-800 px-2">
-            Or
-          </div>
-        </div>
         <Suspense fallback={ <LoadingLayout/> }> 
           <Outlet/>
         </Suspense>

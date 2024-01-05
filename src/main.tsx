@@ -1,8 +1,8 @@
 import React from "react"
 import ReactDOM from "react-dom/client"
 import Head from "@/components/Head"
-import NotificationLayout from "@/layouts/NotificationLayout"
 import DialogLayout from "@/layouts/DialogLayout"
+import AlertLayout from "@/layouts/AlertLayout"
 import Providers from "@/providers"
 import App from "@/App.tsx"
 
@@ -14,7 +14,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <Providers>
       <DialogLayout/>
-      <NotificationLayout/>
+      <AlertLayout/>
       <Head>
         <title>{ config.app.title }</title>
       </Head>

@@ -12,7 +12,7 @@ const DropdownMenu: React.FC<Props> = ({ append, children, onClose }) => {
   return (
     <div 
       ref={ ref } 
-      className="absolute bottom-0 right-0 translate-y-[calc(100%+0.5rem)] z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700"
+      className="absolute bottom-0 right-0 translate-y-[calc(100%+0.5rem)] z-10 bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700"
       onClickCapture={ onClickCapture } 
     >
       { append }
