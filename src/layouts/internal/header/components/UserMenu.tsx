@@ -23,8 +23,8 @@ const UserMenu: React.FC = () => {
       parent={ <Avatar/> } 
       append={ <UserMetadata user={ user }/> }
     >
-      <Item label="Change Theme" icon={ isDark ? "sun" : "moon" } onClick={ toggleTheme }/>
-      <Item label="Sign out" icon="right_from_bracket" onClick={ () => sessionStore.logout() }/>
+      <Item children="Change Theme" icon={ isDark ? "sun" : "moon" } onClick={ toggleTheme }/>
+      <Item children="Sign out" icon="right_from_bracket" onClick={ () => sessionStore.logout() }/>
     </Dropdown>
   )
 }

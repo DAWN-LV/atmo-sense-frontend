@@ -9,7 +9,7 @@ export default {
   theme: {
     extend: {
       zIndex: {
-        "notification": 10_000,
+        "alert": 10_000,
       },
       keyframes: {
         "shake-horizontal": {

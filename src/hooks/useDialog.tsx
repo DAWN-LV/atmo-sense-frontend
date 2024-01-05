@@ -57,7 +57,7 @@ function useDialog<
     return (
      <>
         { dialogState.isRevealed ? (
-          <div ref={ dialogRef } className="fixed inset-0 max-w-4xl h-fit m-auto" style={{ zIndex }}>
+          <div ref={ dialogRef } className="fixed inset-0 max-w-6xl h-fit m-auto" style={{ zIndex }}>
             <Component
               { ...props as ComponentPropsType & React.HTMLAttributes<HTMLElement> }
               onCancel={ dialogState.cancel }

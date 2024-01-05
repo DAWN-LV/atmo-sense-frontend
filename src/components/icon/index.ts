@@ -24,6 +24,12 @@ import Play from "@/components/icon/components/svg/play.svg?raw"
 import Database from "@/components/icon/components/svg/database.svg?raw"
 import Signal from "@/components/icon/components/svg/signal.svg?raw"
 import Clipboard from "@/components/icon/components/svg/clipboard.svg?raw"
+import Gear from "@/components/icon/components/svg/gear.svg?raw"
+import UserGroup from "@/components/icon/components/svg/user-group.svg?raw"
+import LocationCrosshair from "@/components/icon/components/svg/location-crosshairs.svg?raw"
+import NetworkGroup from "@/components/icon/components/svg/network-wired.svg?raw"
+import ChartSimple from "@/components/icon/components/svg/chart-simple.svg?raw"
+import Envelope from "@/components/icon/components/svg/envelope.svg?raw"
 
 const icons = {
   gauge: Gauge,
@@ -52,6 +58,12 @@ const icons = {
   database: Database,
   signal: Signal,
   clipboard: Clipboard,
+  gear: Gear,
+  user_group: UserGroup,
+  location_crosshair: LocationCrosshair,
+  network_group: NetworkGroup,
+  chart_simple: ChartSimple,
+  envelope: Envelope,
 }
 
 export type IconName = keyof typeof icons

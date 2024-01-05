@@ -1,5 +1,5 @@
 import Button from "@/components/Button"
-import { useNotification } from "@/providers"
+import { useAlert } from "@/providers"
 import { classNames } from "@/utils"
 
 type Props = React.HTMLAttributes<HTMLSpanElement> & {
@@ -8,14 +8,13 @@ type Props = React.HTMLAttributes<HTMLSpanElement> & {
 }
 
 const Clipboard: React.FC<Props> = ({ title, label, ...props }) => {
-  const notification = useNotification()
+  const alert = useAlert()
 
   const handleCopy = () => {
     navigator.clipboard.writeText(label).then(() => {
-      notification.add({
-        type: "success",
-        title: "Copy Successful",
-        message: "Text has been successfully copied to clipboard."
+      alert.add({
+        category: "success",
+        content: "Text has been successfully copied to clipboard."
       })
     })
   }

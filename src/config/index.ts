@@ -15,7 +15,7 @@ const api: ApiConfig = {
 }
 
 const socket: SocketConfig = {
-  url: "ws://" + location.hostname + ":3000"
+  baseUrl: "ws://" + location.hostname + ":3000"
 }
 
 export default { app, api, socket } as Readonly<Config>

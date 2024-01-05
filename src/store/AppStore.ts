@@ -1,17 +1,18 @@
-import { http } from "@/globals"
+import { http, socket } from "@/globals"
+import { reaction } from "mobx"
 import useAsyncState from "@/hooks/mobx/useAsyncState"
-import SensorStore from "@/store/sensor/SensorStore"
 import SessionStore from "@/store/session/SessionStore"
 import UserStore from "@/store/user/UserStore"
-import { reaction } from "mobx"
+import SensorContext from "@/store/sensor/SensorContext"
+import NotificationStore from "@/features/notifications/NotificationStore"
 
 export default class AppStore {
-  readonly sensorStore
+  readonly sensorContext
   readonly sessionStore
   readonly userStore
-  
+
   constructor() {
-    this.sensorStore = this.createSensorStore()
+    this.sensorContext = this.createSensorContext()
     this.sessionStore = this.createSessionStore()
     this.userStore = this.createUserStore()
 
@@ -19,12 +20,12 @@ export default class AppStore {
   }
 
   load = useAsyncState(async () => {
-    await this.sensorStore.load()
+    await this.sensorContext.load()
     await this.userStore.load()
   })
 
-  private createSensorStore() {
-    return new SensorStore()
+  private createSensorContext() {
+    return new SensorContext()
   }
 
   private createSessionStore() {
@@ -35,13 +36,19 @@ export default class AppStore {
     return new UserStore()
   }
 
+  // private createNotificationStore() {
+  //   return new NotificationStore()
+  // }
+
   private setupConnections() {
     reaction(
       () => this.sessionStore.isValid, 
       (isValid) => {
         if (isValid) {
-          http.setAuthorization("Bearer " + this.sessionStore.session.token)
+          void socket.connect(this.sessionStore.session.token)
 
+          void http.setAuthorization("Bearer " + this.sessionStore.session.token)
+          
           void this.load()
         }
       },

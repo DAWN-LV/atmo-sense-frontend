@@ -1,12 +1,8 @@
 import HttpClient from "@/plugin/HttpClient"
-import io from "socket.io-client"
+import SocketClient from "@/plugin/SocketClient"
 import config from "@/config"
 
 const http = new HttpClient(config.api.baseUrl)
-const socket = io(config.socket.url)
-
-socket.on("connect", () => {
-  console.log("Socket connected.")
-})
+const socket = new SocketClient(config.socket.baseUrl)
 
 export { http, socket }

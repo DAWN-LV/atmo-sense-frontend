@@ -1,14 +1,14 @@
 import HttpException from "@/error/exceptions/HttpException"
-import NotificationStore from "@/store/notification/NotificationStore"
+import NotificationStore from "@/store/alerts/AlertStore"
 
-export default function createHttpErrorHandler(notification: NotificationStore) {
+export default function createHttpErrorHandler(alert: NotificationStore) {
   return (error: Error) => {
     if (error instanceof HttpException) {
-      notification.add({
-        type: "error",
-        title: "Something went wrong...",
-        message: error.body.message,
+      alert.add({
+        category: "error",
+        content: error.body.message,
       })
+      
       return false
     }
   }

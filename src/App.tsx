@@ -2,24 +2,24 @@ import { observer } from "mobx-react-lite"
 import { RouterProvider, createBrowserRouter } from "react-router-dom"
 import { privateRoutes, publicRoutes } from "@/routes"
 import LoadingLayout from "@/layouts/LoadingLayout"
-import { useAppStore, useNotification } from "@/providers"
 import setupErrorHandler from '@/error/ErrorHandler'
 import createHttpErrorHandler from "./error/handlers/createHttpErrorHandler"
+import { useAlert } from "@/providers/internal/AlertProvider"
+import { useAppStore } from "@/providers"
 
 const App: React.FC = () => {
   const { sessionStore, load } = useAppStore()
-  const notification = useNotification()
+  const alert = useAlert()
 
   setupErrorHandler([
-    createHttpErrorHandler(notification),
+    createHttpErrorHandler(alert),
     function (error) {
-      notification.add({
-        type: "error",
-        title: error.name,
-        message: error.message,
+      alert.add({
+        category: "error",
+        content: error.message,
       })
   
-      console.warn(error)
+      console.warn("Error: ", error)
   
       return false
     }
