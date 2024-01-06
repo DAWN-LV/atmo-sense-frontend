@@ -5,14 +5,12 @@ import { Dropdown, Item } from "@/components/dropdown"
 import UpdateGroupDialog from "@/pages/group/components/dialog/UpdateGroupDalog"
 import GroupModel from "@/store/sensor/groups/GroupModel"
 import useConfirmationDialog from "@/hooks/useConfirmationDialog"
-import ShareGroupDialog from "@/pages/group/components/dialog/ShareGroupDialog"
 import useDialog from "@/hooks/useDialog"
 import Icon from "@/components/icon"
 
 const GroupSectionPrepend: React.FC<{ group: GroupModel }> = ({ group }) => {
   const alert = useAlert()
 
-  const shareDialog = useDialog(ShareGroupDialog, { group }, { persistent: true })
   const updateDialog = useDialog(UpdateGroupDialog, { group }, { persistent: true })
   const deleteDialog = useConfirmationDialog({
     title: 'Are you sure?',
@@ -36,7 +34,6 @@ const GroupSectionPrepend: React.FC<{ group: GroupModel }> = ({ group }) => {
 
   return (
     <Dropdown parent={ <Icon name="ellipsis_vertical" className="cursor-pointer"/> }>
-      <Item children="Share" icon="envelope" onClick={ shareDialog.reveal }/>
       <Item children="Edit" icon="gear" onClick={ updateDialog.reveal }/>
       <Item 
         children="Remove" 
