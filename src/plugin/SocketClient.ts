@@ -10,10 +10,22 @@ export default class SocketClient {
       query: { token }
     })
 
-    // this.socket.on('disconnect', () => this.disconnect())
+    this.socket.on('connect', () => {
+      console.log('Socket connected')
+    })
+
+    this.socket.on('disconnect', () => {
+      console.log('Socket disconnected')
+      this.disconnect()
+    })
+
+    this.socket.on('connect_error', (error) => {
+      console.error('Connection Error:', error)
+    })
   }
 
   on(action: string, callback: (...args: any[]) => void) {
+    console.log(`Listening for action: ${action}`)
     this.socket?.on(action, callback)
   }
 
@@ -22,7 +34,7 @@ export default class SocketClient {
       this.socket.disconnect()
       this.socket = undefined
 
-      console.log('Socket disconnected')
+      console.log('Socket manually disconnected')
     }
   }
 }
