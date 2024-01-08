@@ -8,6 +8,7 @@ export default class SocketClient {
   async connect(token: string) {
     this.socket = io(this.baseUrl, {
       query: { token },
+      transports: [ 'websocket' ],
       withCredentials: true,
     })
 
