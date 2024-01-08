@@ -5,12 +5,8 @@ export default class SocketClient {
 
   constructor(private baseUrl: string) {}
 
-  async connect(token: string) {
-    this.socket = io(this.baseUrl, {
-      query: { token },
-      transports: [ 'websocket' ],
-      withCredentials: true,
-    })
+  async connect() {
+    this.socket = io(this.baseUrl)
 
     this.socket.on('connect', () => {
       console.log('Socket connected')
