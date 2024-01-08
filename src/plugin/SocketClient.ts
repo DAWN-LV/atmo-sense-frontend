@@ -7,7 +7,8 @@ export default class SocketClient {
 
   async connect(token: string) {
     this.socket = io(this.baseUrl, {
-      query: { token }
+      query: { token },
+      withCredentials: true,
     })
 
     this.socket.on('connect', () => {
