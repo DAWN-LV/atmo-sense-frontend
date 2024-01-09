@@ -16,19 +16,17 @@ const PagePrepend: React.FC = () => (
 )
 
 const SensorPage: React.FC = () => {
-  const [ search, setSearch ] = useState('')
+  const [ term, setTerm ] = useState('')
   const { sensorContext: { groupStore } } = useAppStore()
 
-  const ungrouped = useMemo(() => groupStore.ungrouped.filter(sensor => sensor.name.includes(search)), [ groupStore.ungrouped, search ])
-  const grouped = useMemo(() => {
-    return groupStore.groups.values.map(group => ({
-      group: group, 
-      sensors: group.sensors.filter(sensor => sensor.name.includes(search))
-    }))
-  }, [ groupStore.grouped, search ])
+  const ungrouped = useMemo(() => groupStore.ungrouped.filter(sensor => sensor.name.includes(term)), [ groupStore.ungrouped, term ])
+  const grouped = useMemo(() => groupStore.groups.values.map(group => ({
+    group: group, 
+    sensors: group.sensors.filter(sensor => sensor.name.includes(term))
+  })) , [ groupStore.grouped, term ])
 
   return (
-    <Page breadcrumb={ ['sensors'] } prepend={ <PagePrepend/> } onSearch={ (value) => setSearch(value.toLowerCase()) }>
+    <Page breadcrumb={ ['sensors'] } prepend={ <PagePrepend/> } onSearch={ (value) => setTerm(value.toLowerCase()) }>
       <Accordion title="Ungrouped Sensors" initState={ Boolean(groupStore.ungrouped.length) }>
         <div className="flex flex-wrap gap-4 justify-center md:justify-normal">
           {ungrouped.map(sensor => (
@@ -36,7 +34,7 @@ const SensorPage: React.FC = () => {
           ))}
         </div>
       </Accordion>
-      <GroupSection data={ grouped }/>
+      <GroupSection term={ term } data={ grouped }/>
     </Page>
   )
 }

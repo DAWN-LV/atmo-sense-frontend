@@ -46,12 +46,12 @@ const GroupSectionPrepend: React.FC<{ group: GroupModel }> = ({ group }) => {
   )
 }
 
-const GroupSection: React.FC<{ data: Array<{ group: GroupModel, sensors: SensorModel[] }> }> = ({ data }) => {
+const GroupSection: React.FC<{ term: string, data: Array<{ group: GroupModel, sensors: SensorModel[] }> }> = ({ term, data }) => {
   return (
     <>
       {data.map(({ group, sensors }) => (
         <>
-          { (sensors.length ? group.sensors.length : true) ? (
+          { (term ? sensors.length : true) ? (
             <Accordion 
               key={ group.id } 
               title={ group.data.name } 
