@@ -25,7 +25,7 @@ const SensorPage: React.FC = () => {
       group: group, 
       sensors: group.sensors.filter(sensor => sensor.name.includes(search))
     }))
-  }, [ groupStore.groups.values, search ])
+  }, [ groupStore.grouped, search ])
 
   return (
     <Page breadcrumb={ ['sensors'] } prepend={ <PagePrepend/> } onSearch={ (value) => setSearch(value.toLowerCase()) }>

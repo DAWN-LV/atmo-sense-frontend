@@ -6,8 +6,8 @@ import UpdateGroupDialog from "@/pages/group/components/dialog/UpdateGroupDalog"
 import GroupModel from "@/store/sensor/groups/GroupModel"
 import useConfirmationDialog from "@/hooks/useConfirmationDialog"
 import useDialog from "@/hooks/useDialog"
-import Icon from "@/components/icon"
 import SensorModel from "@/store/sensor/sensors/SensorModel"
+import Icon from "@/components/icon"
 
 const GroupSectionPrepend: React.FC<{ group: GroupModel }> = ({ group }) => {
   const alert = useAlert()
@@ -51,7 +51,7 @@ const GroupSection: React.FC<{ data: Array<{ group: GroupModel, sensors: SensorM
     <>
       {data.map(({ group, sensors }) => (
         <>
-          { sensors.length > 0 ? (
+          { (sensors.length ? group.sensors.length : true) ? (
             <Accordion 
               key={ group.id } 
               title={ group.data.name } 
