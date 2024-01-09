@@ -7,6 +7,7 @@ import GroupModel from "@/store/sensor/groups/GroupModel"
 import useConfirmationDialog from "@/hooks/useConfirmationDialog"
 import useDialog from "@/hooks/useDialog"
 import Icon from "@/components/icon"
+import SensorModel from "@/store/sensor/sensors/SensorModel"
 
 const GroupSectionPrepend: React.FC<{ group: GroupModel }> = ({ group }) => {
   const alert = useAlert()
@@ -45,22 +46,26 @@ const GroupSectionPrepend: React.FC<{ group: GroupModel }> = ({ group }) => {
   )
 }
 
-const GroupSection: React.FC<{ groups: GroupModel[] }> = ({ groups }) => {
+const GroupSection: React.FC<{ data: Array<{ group: GroupModel, sensors: SensorModel[] }> }> = ({ data }) => {
   return (
     <>
-      {groups.map(group => (
-        <Accordion 
-          key={ group.id } 
-          title={ group.data.name } 
-          initState={ Boolean(group.sensors.length) }
-          prepend={ <GroupSectionPrepend group={ group }/> }
-        >
-          <div className="flex flex-wrap gap-4 justify-center md:justify-normal">
-            {group.sensors.map(sensor => (
-              <SensorCard key={ sensor.id } sensor={ sensor }/>
-            ))}
-          </div>
-        </Accordion>
+      {data.map(({ group, sensors }) => (
+        <>
+          { sensors.length > 0 ? (
+            <Accordion 
+              key={ group.id } 
+              title={ group.data.name } 
+              initState={ Boolean(group.sensors.length) }
+              prepend={ <GroupSectionPrepend group={ group }/> }
+            >
+              <div className="flex flex-wrap gap-4 justify-center md:justify-normal">
+                {sensors.map(sensor => (
+                  <SensorCard key={ sensor.id } sensor={ sensor }/>
+                ))}
+              </div>
+            </Accordion>
+          ) : null }
+        </>
       ))}
     </>
   )
