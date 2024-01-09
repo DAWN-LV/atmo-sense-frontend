@@ -22,7 +22,7 @@ const ShareGroupDialog: React.FC<Props> = ({ group, onConfirm, onCancel }) => {
   const alert = useAlert()
 
   const handleConfirm = async ({ email }: { email: string }) => {
-    await group.share(email)
+    // await group.share(email)
     alert.add({
       category: "success",
       content: "The new invite has been successfully shared."

@@ -13,8 +13,6 @@ export default class GroupStore {
 
   constructor(readonly context: SensorContext) {
     makeAutoObservable(this)
-
-    this.listenSubscription()
   }
 
   load = useAsyncState(async () => {
@@ -59,15 +57,15 @@ export default class GroupStore {
     return this.setGroup(group)
   }
 
+  listenSubscription() {
+    this.subscription.onCreate(id => this.loadOne(id))
+    this.subscription.onUpdate(id => this.loadOne(id))
+    this.subscription.onDelete(id => this.groups.delete(id))
+  }
+
   private setGroup(dto: GroupDTO) {
     const group = new GroupModel(this.context, dto)
     this.groups.set(group.id, group)
     return group
-  }
-
-  private listenSubscription() {
-    this.subscription.onCreate(id => this.loadOne(id))
-    this.subscription.onUpdate(id => this.loadOne(id))
-    this.subscription.onDelete(id => this.groups.delete(id))
   }
 }

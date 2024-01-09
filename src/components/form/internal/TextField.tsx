@@ -3,7 +3,7 @@ import { classNames } from '@/utils'
 import { CommonProps } from '@/components/form/types'
 
 type Props = React.HTMLAttributes<HTMLInputElement> & {
-  onChange?: (data: any) => void
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
 }
 
 const TextField: React.FC<CommonProps & Props> = ({ onChange, ...props }) => (

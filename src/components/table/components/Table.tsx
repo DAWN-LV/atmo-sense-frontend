@@ -10,7 +10,7 @@ const Table: React.FC<Props> = ({ ...props }) => (
       <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-800 dark:text-gray-400">
         <tr>
           {props.columns.map(column => (
-            <th scope="col" className="px-6 py-3">
+            <th key={ column } scope="col" className="px-6 py-3">
               { column }
             </th>
           ))}

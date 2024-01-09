@@ -15,22 +15,26 @@ export default class GroupModel {
     makeAutoObservable(this)
   }
 
+  get name() {
+    return this.data.name.trim().toLocaleLowerCase()
+  }
+
   get sensors() {
     return this.context.sensorStore.sensors.values.filter(sensor => (
       this.data.sensors?.find(item => item.id === sensor.id)
     ))
   }
 
-  async share(email: string) {
-    await NotificationApi.create({
-      email: email,
-      type: "GROUP:INVITATION",
-      data: JSON.stringify({
-        groupId: this.id,
-        groupName: this.data.name,
-      })
-    })
-  }
+  // async share(email: string) {
+  //   await NotificationApi.create({
+  //     email: email,
+  //     type: "GROUP:INVITATION",
+  //     data: JSON.stringify({
+  //       groupId: this.id,
+  //       groupName: this.data.name,
+  //     })
+  //   })
+  // }
 
   async delete() {
     await GroupApi.delete(this.id)

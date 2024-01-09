@@ -5,6 +5,7 @@ import SensorApi from "@/store/sensor/sensors/SensorApi"
 import { CreateSensorDTO, SensorDTO } from "@/store/sensor/sensors/types"
 import SensorSubscription from "@/store/sensor/sensors/SensorSubscription"
 import { makeAutoObservable } from "mobx"
+import { useEffect } from "react"
 
 export default class SensorStore {
   private subscription = new SensorSubscription()
@@ -12,8 +13,6 @@ export default class SensorStore {
 
   constructor() {
     makeAutoObservable(this)
-
-    this.listenSubscription()
   }
 
   load = useAsyncState(async () => {
@@ -42,15 +41,15 @@ export default class SensorStore {
     return this.setSensor(sensor)
   }
 
+  listenSubscription() {
+    this.subscription.onCreate(id => this.loadOne(id))
+    this.subscription.onUpdate(id => this.loadOne(id))
+    this.subscription.onDelete(id => this.sensors.delete(id))
+  }
+
   private setSensor(dto: SensorDTO) {
     const sensor = new SensorModel(this, dto)
     this.sensors.set(sensor.id, sensor)
     return sensor
-  }
-
-  private listenSubscription() {
-    this.subscription.onCreate(id => this.loadOne(id))
-    this.subscription.onUpdate(id => this.loadOne(id))
-    this.subscription.onDelete(id => this.sensors.delete(id))
   }
 }

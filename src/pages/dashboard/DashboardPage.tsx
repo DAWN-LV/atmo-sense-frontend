@@ -23,7 +23,7 @@ const DashboardPage: React.FC = () => {
         <DashboardTile icon="user_group" label="Total Groups" count={ groupStore.count }/>
       </div>
 
-      <Accordion title="Recently added sensors" initState={ Boolean(sensorStore.count) }>
+      <Accordion title="Recently updated sensors" initState={ Boolean(sensorStore.count) }>
         <div className="flex flex-wrap gap-4 justify-center md:justify-normal">
           {sensors.map(sensor => (
             <SensorCard key={ sensor.id } sensor={ sensor }/>

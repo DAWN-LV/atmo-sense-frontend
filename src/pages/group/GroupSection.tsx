@@ -1,5 +1,5 @@
 import Accordion from "@/components/Accordion"
-import { useAppStore, useAlert } from "@/providers"
+import { useAlert } from "@/providers"
 import SensorCard from "@/pages/sensor/components/SensorCard"
 import { Dropdown, Item } from "@/components/dropdown"
 import UpdateGroupDialog from "@/pages/group/components/dialog/UpdateGroupDalog"
@@ -45,12 +45,10 @@ const GroupSectionPrepend: React.FC<{ group: GroupModel }> = ({ group }) => {
   )
 }
 
-const GroupSection: React.FC = () => {
-  const { sensorContext: { groupStore } } = useAppStore()
-
+const GroupSection: React.FC<{ groups: GroupModel[] }> = ({ groups }) => {
   return (
     <>
-      {groupStore.groups.map(group => (
+      {groups.map(group => (
         <Accordion 
           key={ group.id } 
           title={ group.data.name } 

@@ -40,16 +40,20 @@ export default class AppStore {
   //   return new NotificationStore()
   // }
 
+  private listenSubscription() {
+    this.sensorContext.listenSubscription()
+  }
+
   private setupConnections() {
     reaction(
       () => this.sessionStore.isValid, 
       (isValid) => {
         if (isValid) {
-          void socket.connect()
-
+          void socket.connect(this.sessionStore.session.token)
           void http.setAuthorization("Bearer " + this.sessionStore.session.token)
-          
+
           void this.load()
+          void this.listenSubscription()
         }
       },
       { fireImmediately: true }

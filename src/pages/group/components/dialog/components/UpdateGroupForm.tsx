@@ -1,3 +1,4 @@
+import ScrollArea from "@/components/ScrollArea"
 import { HiddenField, TextField } from "@/components/form"
 import Group from "@/components/form/internal/Group"
 import useSelect from "@/hooks/useSelect"
@@ -15,8 +16,8 @@ const UpdateGroupForm: React.FC<{ group: GroupModel }> = ({ group }) => {
   )
 
   const sensors = useMemo(() => [ 
-    ...groupStore.ungrouped,
-    ...group.sensors
+    ...group.sensors,
+    ...groupStore.ungrouped
   ], [ groupStore.ungrouped, group.sensors ])
 
   return (
@@ -27,7 +28,7 @@ const UpdateGroupForm: React.FC<{ group: GroupModel }> = ({ group }) => {
 
       { sensors.length ? (
         <Group title="Sensors (Optional)">
-          <div className="space-x-2">
+          <ScrollArea className="flex flex-wrap gap-2 max-h-96">
             {sensors.map(sensor => (
               <BaseSensorCard 
                 sensor={ sensor } 
@@ -35,7 +36,7 @@ const UpdateGroupForm: React.FC<{ group: GroupModel }> = ({ group }) => {
                 onClick={ () => toggle(sensor.id) } 
               />
             ))}
-          </div>
+          </ScrollArea>
           <HiddenField name="sensorIds" value={ items }/>
         </Group>
       ) : null }

@@ -1,3 +1,4 @@
+import ScrollArea from "@/components/ScrollArea"
 import { HiddenField, TextField } from "@/components/form"
 import Group from "@/components/form/internal/Group"
 import useSelect from "@/hooks/useSelect"
@@ -18,7 +19,7 @@ const CreateGroupForm: React.FC = () => {
 
       { groupStore.ungrouped.length ? (
         <Group title="Sensors (Optional)">
-          <div className="space-x-2">
+          <ScrollArea className="flex flex-wrap gap-2 max-h-96">
             {groupStore.ungrouped.map(sensor => (
               <BaseSensorCard 
                 key={ sensor.id }
@@ -27,7 +28,7 @@ const CreateGroupForm: React.FC = () => {
                 onClick={ () => toggle(sensor.id) } 
               />
             ))}
-          </div>
+          </ScrollArea>
           <HiddenField name="sensorIds" value={ items }/>
         </Group>
       ) : null }

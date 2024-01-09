@@ -27,7 +27,9 @@ const HistoricalChart: React.FC<{ sensor: SensorModel, from: number, to: number 
       .then(data => setPoints(data.map(data => ({ x: data[0], y: data[1] }))))
   }, [ sensor, from, to ])
 
-  return <LineChart points={ points }/>
+  return (
+    <LineChart points={ points }/>
+  )
 })
 
 const ShowSensorDialog: React.FC<{ sensor: SensorModel }> = ({ sensor }) => {

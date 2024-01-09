@@ -22,3 +22,21 @@ export function classNames(...args: Array<string | Record<string, boolean> | und
   .filter(Boolean)
   .join(' ')
 }
+
+export function debounce<F extends (...args: any[]) => void>(func: F, waitFor: number): (this: ThisParameterType<F>, ...args: Parameters<F>) => void {
+  let timeout: NodeJS.Timeout | null = null
+
+  return function(this: ThisParameterType<F>, ...args: Parameters<F>) {
+    const context = this
+    const later = () => {
+      timeout = null
+      func.apply(context, args)
+    }
+
+    if (timeout !== null) {
+      clearTimeout(timeout)
+    }
+
+    timeout = setTimeout(later, waitFor)
+  }
+}

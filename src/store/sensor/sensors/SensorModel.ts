@@ -14,6 +14,10 @@ export default class SensorModel {
     makeAutoObservable(this)
   }
 
+  get name() {
+    return this.data.name.trim().toLocaleLowerCase()
+  }
+
   async delete() {
     await SensorApi.delete(this.id)
     this.store.sensors.delete(this.id)

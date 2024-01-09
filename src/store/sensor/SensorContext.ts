@@ -19,6 +19,11 @@ export default class SensorContext {
     ])
   })
 
+  listenSubscription() {
+    this.sensorStore.listenSubscription()
+    this.groupStore.listenSubscription()
+  }
+
   private createSensorStore() {
     return new SensorStore()
   }

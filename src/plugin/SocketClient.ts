@@ -5,8 +5,10 @@ export default class SocketClient {
 
   constructor(private baseUrl: string) {}
 
-  async connect() {
-    this.socket = io(this.baseUrl)
+  async connect(token: string) {
+    this.socket = io(this.baseUrl, {
+      query: { token },
+    })
 
     this.socket.on('connect', () => {
       console.log('Socket connected')
@@ -23,7 +25,6 @@ export default class SocketClient {
   }
 
   on(action: string, callback: (...args: any[]) => void) {
-    console.log(`Listening for action: ${action}`)
     this.socket?.on(action, callback)
   }
 
