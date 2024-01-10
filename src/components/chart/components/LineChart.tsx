@@ -15,6 +15,7 @@ import {
 } from "chart.js"
 import zoomPlugin from "chartjs-plugin-zoom"
 import annotationPlugin from "chartjs-plugin-annotation"
+import { calculateLinearRegression } from "@/utils"
 
 import "chartjs-adapter-date-fns"
 
@@ -31,21 +32,34 @@ ChartJS.register(
   annotationPlugin,
 )
 
-interface ILineChartDataPoint {
-  x: number | string | Date
+interface Point {
+  x: number
   y: number
 }
 
 interface Props {
-  points: ILineChartDataPoint[]
+  points: Point[]
   externalOptions?: ChartOptions
 }
 
 const LineChart: React.FC<Props> = ({ points, externalOptions  }) => {
   const chartRef = useRef<any>()
 
+  const prediction = useMemo(() => {
+    if (points.length <= 2) {
+      return undefined
+    }
+
+    const { m, b } = calculateLinearRegression(points)
+
+    const nextX = points[0].x + Math.abs(points[0].x - points[1].x)
+    const nextY = m * nextX + b
+
+    return { x: nextX, y: nextY }
+  }, [ points ])
+  
   const data: ChartData<"line"> = useMemo(() => ({
-    labels: points.map(point => point.x as string),
+    labels: points.map((point) => point.x),
     datasets: [
       {
         label: "Value",
@@ -53,7 +67,7 @@ const LineChart: React.FC<Props> = ({ points, externalOptions  }) => {
         borderColor: "rgb(37, 99, 235)",
         backgroundColor: "#fff",
         tension: 0.4,
-      },
+      }
     ],
   }), [ points ])
 
@@ -67,7 +81,7 @@ const LineChart: React.FC<Props> = ({ points, externalOptions  }) => {
             quarter: "MMM yyyy",
             month: "MMM yyyy",
             day: "MMM dd",
-            hour: "HH:mm",
+            hour: "MMM dd",
             minute: "HH:mm",
           },
         },
@@ -87,7 +101,7 @@ const LineChart: React.FC<Props> = ({ points, externalOptions  }) => {
       zoom: {
         pan: {
           enabled: true,
-          mode: "xy",
+          mode: "x",
         },
         zoom: {
           wheel: {
@@ -96,12 +110,12 @@ const LineChart: React.FC<Props> = ({ points, externalOptions  }) => {
           pinch: {
             enabled: true,
           },
-          mode: "xy",
+          mode: "x",
         },
       },
     },
     ...externalOptions,
-  }) as ChartOptions<'line'>, [ externalOptions ])
+  }) as ChartOptions<"line">, [ externalOptions ])
 
   useEffect(() => {
     if (chartRef.current) {

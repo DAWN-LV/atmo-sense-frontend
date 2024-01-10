@@ -23,7 +23,7 @@ const SensorPage: React.FC = () => {
   const grouped = useMemo(() => groupStore.groups.values.map(group => ({
     group: group, 
     sensors: group.sensors.filter(sensor => sensor.name.includes(term))
-  })) , [ groupStore.grouped, term ])
+  })), [ groupStore.grouped, term ])
 
   return (
     <Page breadcrumb={ ['sensors'] } prepend={ <PagePrepend/> } onSearch={ (value) => setTerm(value.toLowerCase()) }>

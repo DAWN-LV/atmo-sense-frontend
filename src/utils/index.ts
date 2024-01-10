@@ -40,3 +40,22 @@ export function debounce<F extends (...args: any[]) => void>(func: F, waitFor: n
     timeout = setTimeout(later, waitFor)
   }
 }
+
+export function calculateLinearRegression(points: Array<{ x: number, y: number }>) {
+  const n = points.length
+  let sumX = 0, sumY = 0, sumXY = 0, sumX2 = 0
+
+  points.forEach(point => {
+    sumX += point.x
+    sumY += point.y
+    sumXY += point.x * point.y
+    sumX2 += point.x * point.x
+  })
+
+  const meanX = sumX / n
+  const meanY = sumY / n
+  const m = (n * sumXY - sumX * sumY) / (n * sumX2 - sumX * sumX)
+  const b = meanY - m * meanX
+
+  return { m, b }
+}

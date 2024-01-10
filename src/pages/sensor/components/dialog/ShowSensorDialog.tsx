@@ -24,11 +24,13 @@ const HistoricalChart: React.FC<{ sensor: SensorModel, from: number, to: number 
 
   useEffect(() => {
     fetchData(sensor.id, { from, to })
-      .then(data => setPoints(data.map(data => ({ x: data[0], y: data[1] }))))
+      .then(data => setPoints(data.map(data => ({ x: Number(data[0]), y: Number(data[1]) }))))
   }, [ sensor, from, to ])
 
   return (
-    <LineChart points={ points }/>
+    <>{ points.length ? (
+      <LineChart points={ points }/>
+    ) : null }</>
   )
 })
 
