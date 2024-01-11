@@ -8,6 +8,7 @@ import useAsyncState from "@/hooks/mobx/useAsyncState"
 import { observer } from "mobx-react-lite"
 import { Item, Table } from "@/components/table"
 import KBD from "@/components/KBD"
+import LoadingLayout from "@/layouts/LoadingLayout"
 
 const options = [
 	{ label: '1D', value: 86400 },
@@ -27,10 +28,16 @@ const HistoricalChart: React.FC<{ sensor: SensorModel, from: number, to: number 
       .then(data => setPoints(data.map(data => ({ x: Number(data[0]), y: Number(data[1]) }))))
   }, [ sensor, from, to ])
 
+  if (points.length <= 0) {
+    return (
+      <div className="relative h-72">
+        <LoadingLayout/>
+      </div>
+    )
+  }
+
   return (
-    <>{ points.length ? (
-      <LineChart points={ points }/>
-    ) : null }</>
+    <LineChart points={ points }/>
   )
 })
 

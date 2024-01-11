@@ -42,30 +42,41 @@ interface Props {
   externalOptions?: ChartOptions
 }
 
+const prepareChartData = (points: Point[]) => {
+  const sorted = [ ...points ].sort((a, b) => a.x - b.x)
+
+  if (sorted.length <= 2) {
+    return { sorted: sorted, predicted: undefined }
+  }
+
+  const { m, b } = calculateLinearRegression(sorted)
+  const nextX = sorted[sorted.length - 1].x + Math.abs(sorted[0].x - sorted[1].x)
+  const nextY = m * nextX + b
+
+  return { sorted: sorted, predicted: { x: nextX, y: nextY } }
+}
+
 const LineChart: React.FC<Props> = ({ points, externalOptions  }) => {
   const chartRef = useRef<any>()
 
-  const prediction = useMemo(() => {
-    if (points.length <= 2) {
-      return undefined
-    }
+  const { sorted, predicted } = useMemo(() => prepareChartData(points), [ points ])
 
-    const { m, b } = calculateLinearRegression(points)
-
-    const nextX = points[0].x + Math.abs(points[0].x - points[1].x)
-    const nextY = m * nextX + b
-
-    return { x: nextX, y: nextY }
-  }, [ points ])
-  
   const data: ChartData<"line"> = useMemo(() => ({
-    labels: points.map((point) => point.x),
+    labels: sorted.map(point => point.x).concat(predicted ? [ predicted.x ] : []),
     datasets: [
       {
         label: "Value",
-        data: points.map((point) => point.y),
+        data: sorted.map(point => point.y),
         borderColor: "rgb(37, 99, 235)",
         backgroundColor: "#fff",
+        tension: 0.4,
+      },
+      {
+        label: "Prediction",
+        data: [ ...Array(sorted.length - 1).fill(null), sorted[sorted.length - 1].y ].concat(predicted ? [ predicted.y ] : []),
+        borderColor: "rgb(140, 140, 140)",
+        backgroundColor: "#fff",
+        borderDash: [ 5, 10 ],
         tension: 0.4,
       }
     ],

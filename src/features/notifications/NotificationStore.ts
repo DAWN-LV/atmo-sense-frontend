@@ -12,8 +12,6 @@ export default class NotificationStore {
 
   constructor() {
     makeAutoObservable(this)
-
-    this.listenSubscription()
   }
 
   load = useAsyncState(async () => {
@@ -37,7 +35,7 @@ export default class NotificationStore {
     return notification
   }
 
-  private listenSubscription() {
+  listenSubscription() {
     this.subscription.onCreate(id => this.loadOne(id))
   }
 }

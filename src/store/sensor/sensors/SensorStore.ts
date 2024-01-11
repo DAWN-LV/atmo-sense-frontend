@@ -5,7 +5,6 @@ import SensorApi from "@/store/sensor/sensors/SensorApi"
 import { CreateSensorDTO, SensorDTO } from "@/store/sensor/sensors/types"
 import SensorSubscription from "@/store/sensor/sensors/SensorSubscription"
 import { makeAutoObservable } from "mobx"
-import { useEffect } from "react"
 
 export default class SensorStore {
   private subscription = new SensorSubscription()

@@ -1,6 +1,8 @@
 import { ColorPicker, NumberField, SelectField, TextField } from "@/components/form"
 import Group from "@/components/form/internal/Group"
 
+
+
 const CreateSensorForm: React.FC = () => {
   return (
     <div>
@@ -15,7 +17,7 @@ const CreateSensorForm: React.FC = () => {
         <SelectField name="type" label="Type" defaultValue={ "DIGITAL" }>
           <option value="DIGITAL">DIGITAL</option>
         </SelectField>
-        <TextField name="ip" placeholder="192.168.0.1" label="IP Address"/>
+        <TextField name="mac" placeholder="bc:ed:98:c1:44:fb" label="MAC Address"/>
         <NumberField name="gpioPin" placeholder="12" label="GPIO Pin"/>
       </Group>
 
