@@ -25,7 +25,11 @@ const BaseSensorCard: React.FC<Props> = ({ sensor, actions, ...props }) => {
       <div className="flex flex-col text-gray-400 text-xs font-semibold space-y-1">
         <div className="flex items-center space-x-1">
           <Icon name="location_crosshair" className="text-xs"/>
-          <span>{ sensor.data.ip }</span>
+          { sensor.data.ip ? (
+            <span>{ sensor.data.ip }</span>
+          ) : (
+            <span>unknown</span>
+          ) }
         </div>
         <div className="flex items-center space-x-1">
           <Icon name="network_group" className="text-xs"/>

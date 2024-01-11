@@ -5,4 +5,5 @@ export interface SensorTemplateDTO {
   threshold: number | undefined
   min: number
   max: number
+  enabled: boolean
 }

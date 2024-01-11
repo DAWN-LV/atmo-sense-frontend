@@ -49,10 +49,11 @@ export default class AppStore {
       () => this.sessionStore.isValid, 
       (isValid) => {
         if (isValid) {
-          void socket.connect(this.sessionStore.session.token)
           void http.setAuthorization("Bearer " + this.sessionStore.session.token)
-
+          
+          void socket.connect()
           void this.load()
+          
           void this.listenSubscription()
         }
       },
