@@ -3,6 +3,7 @@ import SensorModel from "@/store/sensor/sensors/SensorModel"
 import useAsyncState from "@/hooks/mobx/useAsyncState"
 import SensorApi from "@/store/sensor/sensors/SensorApi"
 import SensorChart from "@/pages/sensor/components/charts/SensorChart"
+import GasChart from "./GasChart"
 
 const ChartFactory: React.FC<{ sensor: SensorModel, from: number, to: number }> = ({ sensor, from, to }) => {
   const [ points, setPoints ] = useState<{ x: number, y: number }[]>([])
@@ -23,6 +24,7 @@ const ChartFactory: React.FC<{ sensor: SensorModel, from: number, to: number }> 
   }
 
   switch (sensor.data.type) {
+    case "GAS": return <GasChart sensor={ sensor } points={ points } template={ sensor.template }/>
     default: return <SensorChart sensor={ sensor } points={ points } template={ sensor.template }/>
   }
 }
