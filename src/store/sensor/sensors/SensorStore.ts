@@ -5,12 +5,13 @@ import SensorApi from "@/store/sensor/sensors/SensorApi"
 import { CreateSensorDTO, SensorDTO } from "@/store/sensor/sensors/types"
 import SensorSubscription from "@/store/sensor/sensors/SensorSubscription"
 import { makeAutoObservable } from "mobx"
+import SensorContext from "@/store/sensor/SensorContext"
 
 export default class SensorStore {
   private subscription = new SensorSubscription()
   readonly sensors = new Dictionary<number, SensorModel>()
 
-  constructor() {
+  constructor(readonly context: SensorContext) {
     makeAutoObservable(this)
   }
 

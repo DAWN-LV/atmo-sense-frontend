@@ -30,6 +30,7 @@ import LocationCrosshair from "@/components/icon/components/svg/location-crossha
 import NetworkGroup from "@/components/icon/components/svg/network-wired.svg?raw"
 import ChartSimple from "@/components/icon/components/svg/chart-simple.svg?raw"
 import Envelope from "@/components/icon/components/svg/envelope.svg?raw"
+import ArrowsRotate from "@/components/icon/components/svg/arrows-rotate.svg?raw"
 
 const icons = {
   gauge: Gauge,
@@ -64,6 +65,7 @@ const icons = {
   network_group: NetworkGroup,
   chart_simple: ChartSimple,
   envelope: Envelope,
+  arrows_rotate: ArrowsRotate,
 }
 
 export type IconName = keyof typeof icons

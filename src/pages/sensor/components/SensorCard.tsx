@@ -6,6 +6,7 @@ import UpdateSensorDialog from "@/pages/sensor/components/dialog/UpdateSensorDia
 import ShowSensorDialog from "@/pages/sensor/components/dialog/ShowSensorDialog"
 import useConfirmationDialog from "@/hooks/useConfirmationDialog"
 import { useAppStore, useAlert } from "@/providers"
+import Indicator from "@/components/Indicator"
 
 const Actions: React.FC<{ sensor: SensorModel }> = ({ sensor }) => {
   const alert = useAlert()

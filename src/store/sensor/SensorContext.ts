@@ -32,7 +32,7 @@ export default class SensorContext {
   }
 
   private createSensorStore() {
-    return new SensorStore()
+    return new SensorStore(this)
   }
 
   private createGroupStore() {

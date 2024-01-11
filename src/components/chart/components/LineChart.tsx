@@ -10,7 +10,6 @@ import {
   Tooltip,
   Legend,
   TimeScale,
-  ChartOptions,
   ChartData,
 } from "chart.js"
 import zoomPlugin from "chartjs-plugin-zoom"
@@ -18,6 +17,7 @@ import annotationPlugin from "chartjs-plugin-annotation"
 import { calculateLinearRegression } from "@/utils"
 
 import "chartjs-adapter-date-fns"
+import { useSensorOptions } from "./options/useSensorOptions"
 
 ChartJS.register(
   CategoryScale,
@@ -39,7 +39,10 @@ interface Point {
 
 interface Props {
   points: Point[]
-  externalOptions?: ChartOptions
+
+  yMin: number
+  yMax: number
+  threshold: number
 }
 
 const prepareChartData = (points: Point[]) => {
@@ -56,10 +59,11 @@ const prepareChartData = (points: Point[]) => {
   return { sorted: sorted, predicted: { x: nextX, y: nextY } }
 }
 
-const LineChart: React.FC<Props> = ({ points, externalOptions  }) => {
+const LineChart: React.FC<Props> = ({ points, yMin, yMax, threshold }) => {
   const chartRef = useRef<any>()
 
   const { sorted, predicted } = useMemo(() => prepareChartData(points), [ points ])
+  const options = useSensorOptions({ yMin, yMax, threshold })
 
   const data: ChartData<"line"> = useMemo(() => ({
     labels: sorted.map(point => point.x).concat(predicted ? [ predicted.x ] : []),
@@ -81,52 +85,6 @@ const LineChart: React.FC<Props> = ({ points, externalOptions  }) => {
       }
     ],
   }), [ points ])
-
-  const options: ChartOptions<"line"> = useMemo(() => ({
-    scales: {
-      x: {
-        type: "time",
-        time: {
-          tooltipFormat: "PPpp",
-          displayFormats: {
-            quarter: "MMM yyyy",
-            month: "MMM yyyy",
-            day: "MMM dd",
-            hour: "MMM dd",
-            minute: "HH:mm",
-          },
-        },
-        title: {
-          display: false,
-        },
-      },
-      y: {
-        beginAtZero: true,
-      },
-    },
-    maintainAspectRatio: false,
-    plugins: {
-      legend: {
-        display: false,
-      },
-      zoom: {
-        pan: {
-          enabled: true,
-          mode: "x",
-        },
-        zoom: {
-          wheel: {
-            enabled: true,
-          },
-          pinch: {
-            enabled: true,
-          },
-          mode: "x",
-        },
-      },
-    },
-    ...externalOptions,
-  }) as ChartOptions<"line">, [ externalOptions ])
 
   useEffect(() => {
     if (chartRef.current) {

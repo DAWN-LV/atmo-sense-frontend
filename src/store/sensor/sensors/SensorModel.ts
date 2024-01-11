@@ -14,6 +14,10 @@ export default class SensorModel {
     makeAutoObservable(this)
   }
 
+  get template() {
+    return this.store.context.configStore.templates.values.find(template => template.data.type === this.data.type)
+  }
+
   get name() {
     return this.data.name.trim().toLocaleLowerCase()
   }

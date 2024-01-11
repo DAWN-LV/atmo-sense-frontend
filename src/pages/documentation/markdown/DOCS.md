@@ -41,10 +41,44 @@ Create a .env file in the project's root directory and specify the necessary set
 Example .env file:
 
 ```bash
-DB_HOST=localhost
-DB_PORT=5432
-DB_USERNAME=your_username
-DB_PASSWORD=your_password
+# App Configuration
+PORT=3000
+
+# Google auth Configuration
+GOOGLE_AUTH_CLIENT_ID="..."
+GOOGLE_AUTH_CLIENT_SECRET="..."
+GOOGLE_AUTH_CALLBACK_URL="..."
+
+# JWT Configuration
+JWT_SECRET="..."
+JWT_EXPIRESIN=86000
+
+# InfluxDB Configuration
+INFLUX_DB_HOST="..."
+INFLUX_DB_PORT=19753
+INFLUX_DB_PROTOCOL="https"
+INFLUX_DB_NAME="..."
+INFLUX_DB_USER="..."
+INFLUX_DB_PASSWORD="..."
+
+# PostgreSQL Configuration
+POSTGRESQL_DB_URI="..."
+
+# Redis Configuration
+REDIS_DB_HOST="..."
+REDIS_DB_PORT=19753
+REDIS_DB_USER="..."
+REDIS_DB_PASSWORD="..."
+
+# MQTT
+MQTT_HOST="..."
+MQTT_PORT=1883
+MQTT_USER="..."
+MQTT_PASSWORD="..."
+
+# Sensor Configuration
+ENDPOINT_URL="..."
+PLATFORM="test_windows"
 ```
 
 ## Running
@@ -52,7 +86,7 @@ DB_PASSWORD=your_password
 Start the backend server with the following command:
 
 ```bash
-$ npm run start
+$ npm run start:dev
 ```
 
 By default, the server will run on port 3000.

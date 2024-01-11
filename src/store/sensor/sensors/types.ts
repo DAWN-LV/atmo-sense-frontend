@@ -1,10 +1,11 @@
 export type SensorType = "CO2" | "GAS" | "MOTION" | "TEMPERATURE" | "PRESSURE" | "SMOKE"
-export type SensorStatus = "ACTIVE" | "INACTIVE" | "ERROR" | "OFFLINE"
+export type SensorStatus = "ACTIVE" | "INACTIVE" | "RESTARTING"
 
 export interface SensorDTO {
   id: number
   name: string
   color?: string
+  status: SensorStatus
   ip: string
   mac: string
   gpioPin: number

@@ -53,7 +53,7 @@ export default class AppStore {
           
           void socket.connect()
           void this.load()
-          
+
           void this.listenSubscription()
         }
       },

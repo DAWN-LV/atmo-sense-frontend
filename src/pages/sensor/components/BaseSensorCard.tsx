@@ -2,6 +2,7 @@ import Icon from "@/components/icon"
 import SensorModel from "@/store/sensor/sensors/SensorModel"
 import { classNames } from "@/utils"
 import { observer } from "mobx-react-lite"
+import SensorIndicator from "@/pages/sensor/components/SensorIndicator"
 
 type Props = React.HTMLAttributes<HTMLDivElement> & {
   sensor: SensorModel,
@@ -12,7 +13,10 @@ const BaseSensorCard: React.FC<Props> = ({ sensor, actions, ...props }) => {
   return (
     <div { ...props } className={ classNames("inline-block relative space-y-2 max-w-xs w-full min-h-36 p-4 border overflow-hidden shadow rounded-lg bg-gray-100 dark:border-gray-700 dark:bg-gray-800", props.className) }>
       <div className="flex items-center justify-between w-full">
-        <h3 className="text-xl font-semibold dark:text-white text-black">{ sensor.data.name }</h3>
+        <div className="flex items-center space-x-2">
+          <SensorIndicator sensor={ sensor }/>
+          <h3 className="text-xl font-semibold dark:text-white text-black">{ sensor.data.name }</h3>
+        </div>
         <div 
           className="flex p-3 rounded-lg text-white text-lg bg-blue-600"
           style={{ backgroundColor: sensor.data.color ? sensor.data.color : undefined }}
