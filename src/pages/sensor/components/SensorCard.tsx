@@ -6,7 +6,6 @@ import UpdateSensorDialog from "@/pages/sensor/components/dialog/UpdateSensorDia
 import ShowSensorDialog from "@/pages/sensor/components/dialog/ShowSensorDialog"
 import useConfirmationDialog from "@/hooks/useConfirmationDialog"
 import { useAppStore, useAlert } from "@/providers"
-import Indicator from "@/components/Indicator"
 
 const Actions: React.FC<{ sensor: SensorModel }> = ({ sensor }) => {
   const alert = useAlert()
@@ -35,8 +34,16 @@ const Actions: React.FC<{ sensor: SensorModel }> = ({ sensor }) => {
 
   return (
     <div className="flex flex-grow justify-between">
-      <Icon name="chart_simple" className="cursor-pointer hover:opacity-50" onClick={ showDialog.reveal }/>
       <div className="flex items-center space-x-2">
+        { sensor.data.status === "ACTIVE" ? (
+          <Icon name="pause" className="cursor-pointer hover:opacity-50" onClick={ () => sensor.pause() }/>
+        ) : (
+          <Icon name="play" className="cursor-pointer hover:opacity-50" onClick={ () => sensor.play() }/>
+        ) }
+        <Icon name="arrows_rotate" className="cursor-pointer hover:opacity-50" onClick={ () => sensor.restart() }/>
+      </div>
+      <div className="flex items-center space-x-2">
+        <Icon name="chart_simple" className="cursor-pointer hover:opacity-50" onClick={ showDialog.reveal }/>
         <Icon name="gear" className="cursor-pointer hover:opacity-50" onClick={ updateDialog.reveal }/>
         <Icon name="trash" className="cursor-pointer text-red-600 hover:opacity-50" onClick={ deleteDialog.reveal }/>
       </div>

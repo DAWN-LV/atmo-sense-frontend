@@ -25,4 +25,16 @@ export default abstract class SensorApi {
   static async delete(id: number) {
     return http.delete(`sensors/${id}`)
   }
+
+  static async play(mac: string) {
+    return http.post(`sensors/${mac}/play`)
+  }
+
+  static async pause(mac: string) {
+    return http.post(`sensors/${mac}/pause`)
+  }
+
+  static async restart(mac: string) {
+    return http.post(`sensors/${mac}/restart`)
+  }
 }

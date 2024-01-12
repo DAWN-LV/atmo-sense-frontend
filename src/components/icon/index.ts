@@ -31,6 +31,7 @@ import NetworkGroup from "@/components/icon/components/svg/network-wired.svg?raw
 import ChartSimple from "@/components/icon/components/svg/chart-simple.svg?raw"
 import Envelope from "@/components/icon/components/svg/envelope.svg?raw"
 import ArrowsRotate from "@/components/icon/components/svg/arrows-rotate.svg?raw"
+import Pause from "@/components/icon/components/svg/pause.svg?raw"
 
 const icons = {
   gauge: Gauge,
@@ -66,6 +67,7 @@ const icons = {
   chart_simple: ChartSimple,
   envelope: Envelope,
   arrows_rotate: ArrowsRotate,
+  pause: Pause,
 }
 
 export type IconName = keyof typeof icons
