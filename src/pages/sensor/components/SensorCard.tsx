@@ -5,7 +5,7 @@ import useDialog from "@/hooks/useDialog"
 import UpdateSensorDialog from "@/pages/sensor/components/dialog/UpdateSensorDialog"
 import ShowSensorDialog from "@/pages/sensor/components/dialog/ShowSensorDialog"
 import useConfirmationDialog from "@/hooks/useConfirmationDialog"
-import { useAppStore, useAlert } from "@/providers"
+import { useAlert } from "@/providers"
 
 const Actions: React.FC<{ sensor: SensorModel }> = ({ sensor }) => {
   const alert = useAlert()
@@ -35,11 +35,8 @@ const Actions: React.FC<{ sensor: SensorModel }> = ({ sensor }) => {
   return (
     <div className="flex flex-grow justify-between">
       <div className="flex items-center space-x-2">
-        { sensor.data.status === "ACTIVE" ? (
-          <Icon name="pause" className="cursor-pointer hover:opacity-50" onClick={ () => sensor.pause() }/>
-        ) : (
-          <Icon name="play" className="cursor-pointer hover:opacity-50" onClick={ () => sensor.play() }/>
-        ) }
+        {/* <Icon name="pause" className="cursor-pointer hover:opacity-50" onClick={ () => sensor.pause() }/>
+        <Icon name="play" className="cursor-pointer hover:opacity-50" onClick={ () => sensor.play() }/> */}
         <Icon name="arrows_rotate" className="cursor-pointer hover:opacity-50" onClick={ () => sensor.restart() }/>
       </div>
       <div className="flex items-center space-x-2">
@@ -51,12 +48,8 @@ const Actions: React.FC<{ sensor: SensorModel }> = ({ sensor }) => {
   )
 }
 
-const SensorCard: React.FC<{ sensor: SensorModel }> = ({ sensor }) => {
-  const { userStore: { user } } = useAppStore()
-
-  return (
-    <BaseSensorCard sensor={ sensor } actions={ user.id === sensor.data.ownerId ? <Actions sensor={ sensor }/> : null }/>
-  )
-}
+const SensorCard: React.FC<{ sensor: SensorModel }> = ({ sensor }) =>  (
+  <BaseSensorCard sensor={ sensor } actions={ <Actions sensor={ sensor }/> }/>
+)
 
 export default SensorCard
